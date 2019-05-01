@@ -10,9 +10,9 @@
 
 /* Create four equal columns that sits next to each other */
 .column {
-  flex: 16%;
-  max-width: 16%;
-  padding: 0 4px;
+  flex: 15.75%;
+  max-width: 15.75%;
+  padding: 0 3px;
 }
 
 .column img {
