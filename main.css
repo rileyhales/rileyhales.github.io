@@ -1,3 +1,8 @@
+body {
+  background-color: #000000;
+  /*background-image: url("https://cdn.wallpapersafari.com/46/81/215NeC.jpg");*/
+}
+
 .poster {
   width: 100%;
 }
@@ -6,6 +11,8 @@
   display: flex;
   flex-wrap: wrap;
   padding: 0 4px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Create four equal columns that sits next to each other */
