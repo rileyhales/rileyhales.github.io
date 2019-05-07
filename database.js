@@ -18,18 +18,22 @@ let database = {
     'Batman Begins': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://i.jeded.com/i/batman-begins.11277.jpg', 'uv': true},
     'Batman Beyond: Return of the Joker': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://bubbawheat.files.wordpress.com/2016/07/batman-beyond-return-of-the-joker.jpg?w=800', 'uv': false},
     'Batman V Superman Dawn of Justice': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://trashfilmguru.files.wordpress.com/2016/03/batman-vs-superman-poster.jpg', 'uv': false},
-    'Batman: Mystery of the Batwoman': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': false},
-    'Beauty and the Beast': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': false},
-    'Beauty and the Beast (2017)': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': false},
-    'Big Hero 6': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': false},
-    'Black Panther': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': false},
-    'Captain America: The First Avenger': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': true, 'bluray': true, 'url': '', 'uv': false},
-    'Captain America: The Winter Soldier': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': false},
-    'Captain America Civil War': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': false},
-    'Carriers': {'ma': false, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': true},
-    'Casino Royale': {'ma': false, 'uhd': false, 'onlyon': false, 'dvd': true, 'bluray': false, 'url': '', 'uv': false},
-    'Cast Away': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': true},
-    'Center Stage': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': false},
+    'Batman: Mystery of the Batwoman': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://fanart.tv/fanart/movies/21683/movieposter/batman-mystery-of-the-batwoman-522f29cc918ce.jpg', 'uv': false},
+    'Beauty and the Beast': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://image.tmdb.org/t/p/original/6ARKAJOUfiwaEcWZekQgqoyFlBd.jpg', 'uv': false},
+    'Beauty and the Beast (2017)': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://image.tmdb.org/t/p/original/2HjngGzVK3NTzptEtsT8E0Hi3ZB.jpg', 'uv': false},
+    'Big Hero 6': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://screencrush.com/files/2014/06/Big-Hero-6-poster-11.jpg', 'uv': false},
+    'Black Panther': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://i.redd.it/69yiy9h9q4f01.jpg', 'uv': false},
+    'Captain America: The First Avenger': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': true, 'bluray': true, 'url': 'http://4.bp.blogspot.com/-PxUdR5ybDy4/TimrSLEUe8I/AAAAAAAACUw/NAfwobXVWQI/s1600/Captain_America_Movie_Poster_Wallpaper_4.jpg', 'uv': false},
+    'Captain America: The Winter Soldier': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://screencrush.com/files/2014/03/Captain-America-The-Winter-Soldier-Poster.jpg', 'uv': false},
+    'Captain America Civil War': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'http://i1.wp.com/teaser-trailer.com/wp-content/uploads/Captain-America-Civil-War-Poster.jpg', 'uv': false},
+    'Carriers': {'ma': false, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://fanart.tv/fanart/movies/25769/movieposter/carriers-52498705570fe.jpg', 'uv': true},
+    'Casino Royale': {'ma': false, 'uhd': false, 'onlyon': false, 'dvd': true, 'bluray': false, 'url': 'https://zuts.files.wordpress.com/2013/10/casion-royale-movie-poster.jpg', 'uv': false},
+    'Cast Away': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://fanart.tv/fanart/movies/8358/movieposter/cast-away-52e8326fa609c.jpg', 'uv': true},
+    'Center Stage': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'http://static.rogerebert.com/uploads/movie/movie_poster/center-stage-2000/large_AaoLohZIixzCfCkDeUzI7Wd2QUQ.jpg', 'uv': false},
+    'Chicken Run': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'http://i.ebayimg.com/images/i/251826692902-0-1/s-l1000.jpg', 'uv': true},
+    'Coco': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'http://newswhistle.com/wp-content/uploads/2017/11/coco-movie-poster.jpg', 'uv': false},
+    'Collateral Beauty': {'ma': true, 'uhd': true, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://www.blackfilm.com/read/wp-content/uploads/2016/10/Collateral-Beauty-Poster-2.jpg', 'uv': true},
+    'Contagion': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'http://meetinthelobby.com/wp-content/uploads/2011/09/ContagionMoviePoster_Large.jpg', 'uv': false},
 
 
     'The Dark Knight': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': true, 'url': 'https://www.movieposter.com/posters/archive/main/69/MPW-34753', 'uv': true,},
@@ -94,7 +98,6 @@ let database = {
         'url': '',
         'uv': true
     },
-    'Coco': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': false},
     'Harry Potter 7': {
         'ma': true,
         'uhd': false,
@@ -248,7 +251,6 @@ let database = {
     'Rememory': {'ma': false, 'uhd': false, 'onlyon': true, 'dvd': false, 'bluray': false, 'url': '', 'uv': false},
     'Megamind\xa0': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': true},
     'Taken 2': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': true, 'url': '', 'uv': true},
-    'Contagion': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': false},
     'Jumper': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': true},
     'Now You See Me 2': {
         'ma': false,
@@ -587,15 +589,6 @@ let database = {
         'uv': false
     },
     'Say Anything': {'ma': false, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': true},
-    'Collateral Beauty': {
-        'ma': true,
-        'uhd': true,
-        'onlyon': false,
-        'dvd': false,
-        'bluray': false,
-        'url': '',
-        'uv': true
-    },
     'The Lego Batman Movie': {
         'ma': true,
         'uhd': true,
@@ -799,7 +792,6 @@ let database = {
         'url': '',
         'uv': true
     },
-    'Chicken Run': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': true},
     'The Pursuit of Happyness': {
         'ma': true,
         'uhd': false,
