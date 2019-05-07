@@ -33,6 +33,7 @@ let database = {
 
 
     'The Dark Knight': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': true, 'url': 'https://www.movieposter.com/posters/archive/main/69/MPW-34753', 'uv': true,},
+    'The Dark Knight Rises': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': true, 'bluray': true, 'url': 'https://is2-ssl.mzstatic.com/image/thumb/Video118/v4/f5/fb/5c/f5fb5cee-3cb9-84e3-5538-2ced6053a1e7/source/1200x630bb.jpg', 'uv': true},
     'The Prestige': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': false},
     'I Am Legend': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': true},
     'The Lion King': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': false},
@@ -48,15 +49,6 @@ let database = {
     },
     'Divergent': {'ma': false, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': true},
     'Water World': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': true},
-    'The Dark Knight Rises': {
-        'ma': true,
-        'uhd': false,
-        'onlyon': false,
-        'dvd': true,
-        'bluray': true,
-        'url': '',
-        'uv': true
-    },
     'The Bourne Supremacy': {
         'ma': true,
         'uhd': false,
