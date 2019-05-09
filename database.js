@@ -1,5 +1,10 @@
+/*
+gremlins and groundhog day need better posters
+ */
+
 let database = {
-    42: {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'http://assets.sbnation.com/assets/2139717/42-poster.jpg', 'uv': false},
+    '13 Going on 30': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://image.tmdb.org/t/p/original/3bvJOPniBYky8905G71uWhRA8Ct.jpg', 'uv': false},
+    '42': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'http://assets.sbnation.com/assets/2139717/42-poster.jpg', 'uv': false},
     '17 Again': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'http://1.bp.blogspot.com/-Z1rZCMWJMS4/UQMCnDHrcGI/AAAAAAAAATs/k7IP7W6VCe8/s640/17_again_poster_11.jpg', 'uv': false},
     "A Knight's Tale": {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://www.highlandernews.org/wp-content/uploads/2013/02/A-Knights-Tale-2001-movie-poster.jpg', 'uv': true},
     'A Quiet Place': {'ma': false, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': true, 'url': 'http://iheartthetalkies.com/wp-content/uploads/2018/06/A-Quiet-Place-Poster-711x1024.jpg', 'uv': true},
@@ -34,7 +39,36 @@ let database = {
     'Coco': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'http://newswhistle.com/wp-content/uploads/2017/11/coco-movie-poster.jpg', 'uv': false},
     'Collateral Beauty': {'ma': true, 'uhd': true, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://www.blackfilm.com/read/wp-content/uploads/2016/10/Collateral-Beauty-Poster-2.jpg', 'uv': true},
     'Contagion': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'http://meetinthelobby.com/wp-content/uploads/2011/09/ContagionMoviePoster_Large.jpg', 'uv': false},
-
+    'Despicable Me': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://i.pinimg.com/originals/46/7e/a4/467ea4d694744f4e83635c7ee95b2c9e.jpg', 'uv': true},
+    'Die Another Day': {'ma': false, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://supposedlyfunblog.files.wordpress.com/2015/03/die-another-day-4.jpg', 'uv': true},
+    'Divergent': {'ma': false, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': true},
+    'Eddie the Eagle': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'http://www.movieposter.com/posters/archive/main/185/MPW-92585', 'uv': false},
+    'Edge of Tomorrow': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': true, 'bluray': true, 'url': 'https://borgdotcom.files.wordpress.com/2014/01/edge-of-tomorrow-2014-movie-poster.jpg', 'uv': true},
+    'Emperor': {'ma': false, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://image.tmdb.org/t/p/original/hPRK4Cg4GK10pLUzRF5FRhe37Rj.jpg', 'uv': true},
+    'Ender\'s Game': {'ma': false, 'uhd': false, 'onlyon': false, 'dvd': true, 'bluray': true, 'url': 'https://cumuloquoise.files.wordpress.com/2014/06/enders-game-poster.jpg', 'uv': true},
+    'Ever After: A Cinderella Story': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://www.iceposter.com/thumbs/MOV_e29dcd4c_b.jpg', 'uv': false},
+    'Fantastic Beasts: The Crimes of Grindelwald': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://cdn.traileraddict.com/content/warner-bros-pictures/fantastic-beasts-2-poster-20.jpg', 'uv': false},
+    'Fate of the Furious F8': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://i.ebayimg.com/images/g/1yUAAOSwDiBZF0vG/s-l300.jpg', 'uv': false},
+    'Field of Dreams': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://fanart.tv/fanart/movies/2323/movieposter/field-of-dreams-533ef757ec7e0.jpg', 'uv': false},
+    'Flushed Away': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'http://www.freemovieposters.net/posters/flushed_away_2006_1468_poster.jpg', 'uv': false},
+    'Frozen': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': true, 'bluray': true, 'url': 'https://owlswellblog.files.wordpress.com/2013/11/frozen-a4.jpg', 'uv': false},
+    'Ghostbusters: Answer the call (2016 Extended)': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://screenrant.com/wp-content/uploads/ghostbusters-2016-poster.jpg', 'uv': false},
+    'Goldeneye': {'ma': false, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'http://4.bp.blogspot.com/-m1mjxcI3KvA/T5V7BEVi4RI/AAAAAAAABVE/wPKo_4ArmIo/s1600/goldeneye_poster.jpg', 'uv': true},
+    'Green Lantern': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://i.pinimg.com/736x/92/72/4a/92724a64abf2f94ba4456c9c26be95a4.jpg', 'uv': false},
+    'Gremlins': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://www.dvdsreleasedates.com/posters/800/G/Gremlins-movie-poster.jpg', 'uv': true},
+    'Groundhog Day': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://fanart.tv/fanart/movies/137/movieposter/groundhog-day-55414b433e640.jpg', 'uv': true},
+    'Happy Feet': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://image.tmdb.org/t/p/original/mS6zBb0X2kepXuNntePaPYCKGT.jpg', 'uv': false},
+    'Harry Potter 1': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://chathamlibrary.files.wordpress.com/2015/04/harry-potter-and-the-sorcerers-stone-official-movie-poster.jpg', 'uv': false},
+    'Harry Potter 2': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://fanart.tv/fanart/movies/672/movieposter/harry-potter-and-the-chamber-of-secrets-555e487735a4c.jpg', 'uv': false},
+    'Harry Potter 3': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://media-cache.cinematerial.com/p/500x/pj5wt0fu/harry-potter-and-the-prisoner-of-azkaban-dvd-cover.jpg', 'uv': false},
+    'Harry Potter 4': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://fanart.tv/fanart/movies/674/movieposter/harry-potter-and-the-goblet-of-fire-54f6410bd3adb.jpg', 'uv': false},
+    'Harry Potter 5': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'http://static.rogerebert.com/uploads/movie/movie_poster/harry-potter-and-the-order-of-the-phoenix-2007/large_lmYmoXVzVrTadfXHZ3v1ySqA1fn.jpg', 'uv': false},
+    'Harry Potter 6': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://fanart.tv/fanart/movies/767/movieposter/harry-potter-and-the-half-blood-prince-555e48bd050ae.jpg', 'uv': false},
+    'Harry Potter 7': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://fanart.tv/fanart/movies/12444/movieposter/harry-potter-and-the-deathly-hallows-part-1-54f8732a98146.jpg', 'uv': false},
+    'Harry Potter 8': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://fanart.tv/fanart/movies/12445/movieposter/harry-potter-and-the-deathly-hallows-part-2-54f872ea2397b.jpg', 'uv': false},
+    'Hidden Figures': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://3.bp.blogspot.com/-Z1vjlR0Nt9E/V71gg_vs-tI/AAAAAAABVtw/Ro0k5lpfgJMo14l4Y69SmM3Z7IFa07UcACLcB/s1600/hidden-figures-movie-poster.jpg', 'uv': true},
+    'How to Train Your Dragon': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://fanart.tv/fanart/movies/10191/movieposter/how-to-train-your-dragon-573e72e97b941.jpg', 'uv': true},
+    'How to Train Your Dragon 2': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'http://www.movieposter.com/posters/archive/main/195/MPW-97989', 'uv': true},
 
     'The Dark Knight': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': true, 'url': 'https://www.movieposter.com/posters/archive/main/69/MPW-34753', 'uv': true,},
     'The Dark Knight Rises': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': true, 'bluray': true, 'url': 'https://is2-ssl.mzstatic.com/image/thumb/Video118/v4/f5/fb/5c/f5fb5cee-3cb9-84e3-5538-2ced6053a1e7/source/1200x630bb.jpg', 'uv': true},
@@ -51,7 +85,6 @@ let database = {
         'url': '',
         'uv': true
     },
-    'Divergent': {'ma': false, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': true},
     'Water World': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': true},
     'The Bourne Supremacy': {
         'ma': true,
@@ -80,15 +113,6 @@ let database = {
         'url': '',
         'uv': true
     },
-    'How to Train Your Dragon': {
-        'ma': true,
-        'uhd': false,
-        'onlyon': false,
-        'dvd': false,
-        'bluray': false,
-        'url': '',
-        'uv': true
-    },
     'Mission Impossible Rogue Nation': {
         'ma': false,
         'uhd': false,
@@ -97,15 +121,6 @@ let database = {
         'bluray': true,
         'url': '',
         'uv': true
-    },
-    'Harry Potter 7': {
-        'ma': true,
-        'uhd': false,
-        'onlyon': false,
-        'dvd': false,
-        'bluray': false,
-        'url': '',
-        'uv': false
     },
     'We Bought A Zoo': {
         'ma': true,
@@ -183,15 +198,6 @@ let database = {
         'url': '',
         'uv': true
     },
-    'Fate of the Furious F8': {
-        'ma': true,
-        'uhd': false,
-        'onlyon': false,
-        'dvd': false,
-        'bluray': false,
-        'url': '',
-        'uv': false
-    },
     'Superman Returns': {
         'ma': true,
         'uhd': false,
@@ -228,7 +234,6 @@ let database = {
         'url': '',
         'uv': true
     },
-    'Hidden Figures': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': true},
     'The Last Witch Hunter': {
         'ma': false,
         'uhd': false,
@@ -239,15 +244,6 @@ let database = {
         'uv': true
     },
     'Men in Black': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': true, 'url': '', 'uv': true},
-    'Harry Potter 3': {
-        'ma': true,
-        'uhd': false,
-        'onlyon': false,
-        'dvd': false,
-        'bluray': false,
-        'url': '',
-        'uv': false
-    },
     'Rememory': {'ma': false, 'uhd': false, 'onlyon': true, 'dvd': false, 'bluray': false, 'url': '', 'uv': false},
     'Megamind\xa0': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': true},
     'Taken 2': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': true, 'url': '', 'uv': true},
@@ -282,8 +278,6 @@ let database = {
         'url': '',
         'uv': false
     },
-    'Flushed Away': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': false},
-    'Green Lantern': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': false},
     'Phantom of the Opera': {
         'ma': false,
         'uhd': false,
@@ -303,15 +297,6 @@ let database = {
         'uv': false
     },
     'X-Men: Apocalypse': {
-        'ma': true,
-        'uhd': false,
-        'onlyon': false,
-        'dvd': false,
-        'bluray': false,
-        'url': '',
-        'uv': false
-    },
-    'Harry Potter 4': {
         'ma': true,
         'uhd': false,
         'onlyon': false,
@@ -369,15 +354,6 @@ let database = {
         'uv': false
     },
     'Taken': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': true, 'url': '', 'uv': true},
-    'Field of Dreams': {
-        'ma': true,
-        'uhd': false,
-        'onlyon': false,
-        'dvd': false,
-        'bluray': false,
-        'url': '',
-        'uv': false
-    },
     'Transformers': {'ma': false, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': true},
     'The Incredibles': {
         'ma': true,
@@ -403,17 +379,7 @@ let database = {
     'Minions': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': true, 'bluray': true, 'url': '', 'uv': true},
     'Oceans 11': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': false},
     'Spider-Man 2': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': false},
-    'Harry Potter 2': {
-        'ma': true,
-        'uhd': false,
-        'onlyon': false,
-        'dvd': false,
-        'bluray': false,
-        'url': '',
-        'uv': false
-    },
     'Les Miserables': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': true},
-    'Happy Feet': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': false},
     'Pitch Perfect': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': false},
     'Tommorrow Never Dies': {
         'ma': false,
@@ -423,15 +389,6 @@ let database = {
         'bluray': false,
         'url': '',
         'uv': true
-    },
-    'Ghostbusters: Answer the call (2016 Extended)': {
-        'ma': true,
-        'uhd': false,
-        'onlyon': false,
-        'dvd': false,
-        'bluray': false,
-        'url': '',
-        'uv': false
     },
     'Lord of the Rings: The Two Towers': {
         'ma': true,
@@ -460,7 +417,6 @@ let database = {
         'url': '',
         'uv': true
     },
-    'Emperor': {'ma': false, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': true},
     'Skyfall': {'ma': false, 'uhd': false, 'onlyon': false, 'dvd': true, 'bluray': false, 'url': '', 'uv': false},
     'The Martian': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': true, 'url': '', 'uv': true},
     'The Amazing Spiderman': {
@@ -508,7 +464,6 @@ let database = {
         'url': '',
         'uv': false
     },
-    'Frozen': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': true, 'bluray': true, 'url': '', 'uv': false},
     'Rise of the Guardians': {
         'ma': true,
         'uhd': false,
@@ -522,25 +477,6 @@ let database = {
     'The Village': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': false},
     'Justice League': {'ma': true, 'uhd': true, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': false},
     'R.I.P.D.': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': true},
-    'Die Another Day': {
-        'ma': false,
-        'uhd': false,
-        'onlyon': false,
-        'dvd': false,
-        'bluray': false,
-        'url': '',
-        'uv': true
-    },
-    'Goldeneye': {'ma': false, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': true},
-    'How to Train Your Dragon 2': {
-        'ma': true,
-        'uhd': false,
-        'onlyon': false,
-        'dvd': false,
-        'bluray': false,
-        'url': '',
-        'uv': true
-    },
     'Jurrasic World': {
         'ma': true,
         'uhd': false,
@@ -550,26 +486,7 @@ let database = {
         'url': '',
         'uv': false
     },
-    'Fanatastic Beasts: The Crimes of Grindelwald': {
-        'ma': true,
-        'uhd': false,
-        'onlyon': false,
-        'dvd': false,
-        'bluray': false,
-        'url': '',
-        'uv': false
-    },
     'Robots': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': true},
-    'Harry Potter 1': {
-        'ma': true,
-        'uhd': false,
-        'onlyon': false,
-        'dvd': false,
-        'bluray': false,
-        'url': '',
-        'uv': false
-    },
-    'Enders Game': {'ma': false, 'uhd': false, 'onlyon': false, 'dvd': true, 'bluray': true, 'url': '', 'uv': true},
     'Nephi and the Brass Plates': {
         'ma': false,
         'uhd': false,
@@ -665,17 +582,7 @@ let database = {
         'url': '',
         'uv': false
     },
-    'Harry Potter 8': {
-        'ma': true,
-        'uhd': false,
-        'onlyon': false,
-        'dvd': false,
-        'bluray': false,
-        'url': '',
-        'uv': false
-    },
     'Madagascar': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': false},
-    'Groundhog Day': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': true},
     'Thor 2': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': false},
     'Red': {'ma': false, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': true},
 
@@ -706,15 +613,6 @@ let database = {
         'url': '',
         'uv': false
     },
-    'Ever After: A Cinderella Story': {
-        'ma': true,
-        'uhd': false,
-        'onlyon': false,
-        'dvd': false,
-        'bluray': false,
-        'url': '',
-        'uv': false
-    },
     "The Zookeeper's Wife": {
         'ma': true,
         'uhd': false,
@@ -734,7 +632,6 @@ let database = {
         'uv': false
     },
     'Thor': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': false},
-    'Gremlins': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': true},
     'The Prince of Egypt': {
         'ma': true,
         'uhd': false,
@@ -743,16 +640,6 @@ let database = {
         'bluray': false,
         'url': '',
         'uv': true
-    },
-    'Edge of Tomorrow': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': true, 'bluray': true, 'url': '', 'uv': true},
-    'Harry Potter 5': {
-        'ma': true,
-        'uhd': false,
-        'onlyon': false,
-        'dvd': false,
-        'bluray': false,
-        'url': '',
-        'uv': false
     },
     'Spider-Man': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': true},
     'Lord of the Rings: The Return of the King': {
@@ -804,15 +691,6 @@ let database = {
     'Moana': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': false},
     'October Sky': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': true},
     'Star Trek': {'ma': false, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': true},
-    'Harry Potter 6': {
-        'ma': true,
-        'uhd': false,
-        'onlyon': false,
-        'dvd': false,
-        'bluray': false,
-        'url': '',
-        'uv': false
-    },
     'Insurgent': {'ma': false, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': true},
     'The Imitation Game': {
         'ma': false,
@@ -880,15 +758,6 @@ let database = {
         'uv': false
     },
     'The Croods': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': true},
-    'Eddie the Eagle': {
-        'ma': true,
-        'uhd': false,
-        'onlyon': false,
-        'dvd': false,
-        'bluray': false,
-        'url': '',
-        'uv': false
-    },
     'Lion': {'ma': false, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': true},
     'Snow White and the 7 Dwarves': {
         'ma': true,
@@ -940,7 +809,6 @@ let database = {
         'url': '',
         'uv': true
     },
-    'Despicable Me': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': true},
     'Sharknado': {'ma': false, 'uhd': false, 'onlyon': true, 'dvd': false, 'bluray': false, 'url': '', 'uv': false},
     'Man of Steel': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': true, 'bluray': true, 'url': '', 'uv': true},
     'Stripes': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': '', 'uv': true},
