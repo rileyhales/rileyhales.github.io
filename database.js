@@ -1,7 +1,3 @@
-/*
-gremlins and groundhog day need better posters
- */
-
 let database = {
     '13 Going on 30': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://image.tmdb.org/t/p/original/3bvJOPniBYky8905G71uWhRA8Ct.jpg', 'uv': false},
     '42': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'http://assets.sbnation.com/assets/2139717/42-poster.jpg', 'uv': false},
@@ -36,7 +32,7 @@ let database = {
     'Cast Away': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://fanart.tv/fanart/movies/8358/movieposter/cast-away-52e8326fa609c.jpg', 'uv': true},
     'Center Stage': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'http://static.rogerebert.com/uploads/movie/movie_poster/center-stage-2000/large_AaoLohZIixzCfCkDeUzI7Wd2QUQ.jpg', 'uv': false},
     'Chicken Run': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'http://i.ebayimg.com/images/i/251826692902-0-1/s-l1000.jpg', 'uv': true},
-    'Coco': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'http://newswhistle.com/wp-content/uploads/2017/11/coco-movie-poster.jpg', 'uv': false},
+    'Coco': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://is3-ssl.mzstatic.com/image/thumb/Video118/v4/5d/7c/eb/5d7ceb5a-88a1-5fcc-b9a0-e8ab010d9c6f/source/900x900bb.jpg', 'uv': false},
     'Collateral Beauty': {'ma': true, 'uhd': true, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://www.blackfilm.com/read/wp-content/uploads/2016/10/Collateral-Beauty-Poster-2.jpg', 'uv': true},
     'Contagion': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'http://meetinthelobby.com/wp-content/uploads/2011/09/ContagionMoviePoster_Large.jpg', 'uv': false},
     'Despicable Me': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://i.pinimg.com/originals/46/7e/a4/467ea4d694744f4e83635c7ee95b2c9e.jpg', 'uv': true},
@@ -55,7 +51,7 @@ let database = {
     'Ghostbusters: Answer the call (2016 Extended)': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://screenrant.com/wp-content/uploads/ghostbusters-2016-poster.jpg', 'uv': false},
     'Goldeneye': {'ma': false, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'http://4.bp.blogspot.com/-m1mjxcI3KvA/T5V7BEVi4RI/AAAAAAAABVE/wPKo_4ArmIo/s1600/goldeneye_poster.jpg', 'uv': true},
     'Green Lantern': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://i.pinimg.com/736x/92/72/4a/92724a64abf2f94ba4456c9c26be95a4.jpg', 'uv': false},
-    'Gremlins': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://www.dvdsreleasedates.com/posters/800/G/Gremlins-movie-poster.jpg', 'uv': true},
+    'Gremlins': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://beesbohemianblog.files.wordpress.com/2013/10/gremlins-poster.jpg', 'uv': true},
     'Groundhog Day': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://fanart.tv/fanart/movies/137/movieposter/groundhog-day-55414b433e640.jpg', 'uv': true},
     'Happy Feet': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://image.tmdb.org/t/p/original/mS6zBb0X2kepXuNntePaPYCKGT.jpg', 'uv': false},
     'Harry Potter 1': {'ma': true, 'uhd': false, 'onlyon': false, 'dvd': false, 'bluray': false, 'url': 'https://chathamlibrary.files.wordpress.com/2015/04/harry-potter-and-the-sorcerers-stone-official-movie-poster.jpg', 'uv': false},
