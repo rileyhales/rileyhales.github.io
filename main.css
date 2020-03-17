@@ -1,8 +1,10 @@
 body {
-  background-color: #cdcdcd;
-  /*background-image: url("https://cdn.wallpapersafari.com/46/81/215NeC.jpg");*/
   padding: 0;
   height: 100%;
+}
+
+img {
+  cursor: pointer;
 }
 
 .poster {
@@ -17,6 +19,7 @@ body {
   padding: 0;
   margin-left: auto;
   margin-right: auto;
+  text-align: center;
 }
 
 #searchbox {
@@ -26,14 +29,21 @@ body {
   width: 20%;
   float: right;
 }
-#searchresults {
-  width: 80%;
+#results-poster {
+  width: 60%;
   margin-left: auto;
   margin-right: auto;
   margin-top: 20px;
 }
+#results-table {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  text-align: center;
+}
 
 .moviepane {
+  background-color: #cdcdcd;
   overflow: scroll;
   height: 100vh;
   float: right;
@@ -49,8 +59,8 @@ body {
 
 /* Create four equal columns that sits next to each other */
 .column {
-  flex: 12.5%;
-  max-width: 12.5%;
+  flex: 14%;
+  max-width: 14%;
   margin-left: auto;
   margin-right: auto;
 }
