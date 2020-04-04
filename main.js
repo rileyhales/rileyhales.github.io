@@ -43,6 +43,7 @@ function searchMovies(movie) {
         img_link = 'https://rileyhales.github.io/Placeholder.jpg';
     }
     $("#results-poster").html('<a href=' + pg + ' target="_blank"><img class="poster" src=' + img_link + '></a>');
+    $("#results-title").html('<h3>' + movie + '</h3>');
     try {
         $("#results-table").html(makeTable(mvdb[movie]));
     } catch (e) {
@@ -55,5 +56,6 @@ $(document).ready(function(){
     populatePosters();
     $("#searchbox").attr({'placeholder': 'Search ' + mvls.length + ' Movies'});
     $("#searchbutton").click(function() {searchMovies($("#searchbox").val())});
+    $("#randombutton").click(function() {searchMovies(mvls[Math.floor(Math.random() * mvls.length)])});
     $('img').click(function() {searchMovies(this.id)})
 });

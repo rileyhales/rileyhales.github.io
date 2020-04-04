@@ -16,18 +16,32 @@ img {
   float: left;
   width: 30%;
   flex-wrap: wrap;
-  padding: 0;
+  padding: 2%;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
 }
 
 #searchbox {
-  width: 75%;
+  width: 60%;
 }
 #searchbutton {
   width: 20%;
   float: right;
+}
+#randombutton {
+  width: 20%;
+  float: right;
+}
+#site-title {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+#results-title {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 #results-poster {
   width: 60%;
