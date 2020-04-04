@@ -86,9 +86,9 @@ def df_to_js(df):
     df.index = df['Movie']
     del df['Movie']
     df.to_json('mvdb.js', orient='index')
-    with open('mvdb.js', 'r') as f:
+    with open('../mvdb.js', 'r') as f:
         db = f.readline()
-    with open('mvdb.js', 'w') as f:
+    with open('../mvdb.js', 'w') as f:
         f.write('mvdb=' + db + ';')
 
 

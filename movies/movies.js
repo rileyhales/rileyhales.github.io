@@ -21,7 +21,7 @@ function populatePosters() {
         if (mvdb[movie]['Poster'] !== '') {
             img_link = img_base + mvdb[movie]['Poster'];
         } else {
-            img_link = 'https://rileyhales.github.io/Placeholder.jpg';
+            img_link = 'https://rileyhales.github.io/assets/images/MoviePosterHolder.jpg';
         }
         let html = "<img id=" + '"' + movie + '"' + 'class="poster" src=' + img_link + '>';
         if (i === 1) {$("#1").append(html);i += 1;}
@@ -40,7 +40,7 @@ function searchMovies(movie) {
     if (mvdb[movie]['Poster'] !== '') {
             img_link = img_base + mvdb[movie]['Poster'];
     } else {
-        img_link = 'https://rileyhales.github.io/Placeholder.jpg';
+        img_link = 'https://rileyhales.github.io/assets/images/MoviePosterHolder.jpg';
     }
     $("#results-title").html('<h3 class="w3-margin-top">' + movie + '</h3>');
     $("#results-poster").html('<a href=' + pg + ' target="_blank"><img class="poster" src=' + img_link + '></a>');

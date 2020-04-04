@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<body>
 <head>
+  <title>rileyhales.com</title>
+  <link rel="shortcut icon" href="/assets/images/me.jpg">
   <meta charset="UTF-8">
-  <link rel="shortcut icon" href="me.jpg">
-  <title>RH - Movie Database</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-ui-dist@1.12.1/jquery-ui.min.css" crossorigin="anonymous">
-  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="index.css">
   
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jquery-ui-dist@1.12.1/jquery-ui.min.js"></script>
-  
-  <script src="https://kit.fontawesome.com/e4826c3ce4.js" crossorigin="anonymous"></script>
-  <script type="text/javascript" src="mvdb.js"></script>
-  <script type="text/javascript" src="main.js"></script>
+  <style>
+    html, body, h1, h2, h3, h4, h5, h6 {
+      font-family: "Roboto", sans-serif
+    }
+  </style>
+
 </head>
 <body>
 
@@ -26,39 +26,41 @@
     <a href="https://rileyhales.com/" class="w3-bar-item w3-button">rileyhales.com</a>
     <!-- Float links to the right. Hide them on small screens -->
     <div class="w3-right w3-hide-small">
-      <a href="https://rileyhales.github.io/cv" class="w3-bar-item w3-button">Resume</a>
-      <a href="https://rileyhales.github.io/" class="w3-bar-item w3-button">Movies</a>
+      <a href="https://rileyhales.com/" class="w3-bar-item w3-button">Home</a>
+      <a href="https://rileyhales.com/cv/" class="w3-bar-item w3-button">Resume</a>
+      <a href="https://rileyhales.com/movies/" class="w3-bar-item w3-button">Movies</a>
     </div>
   </div>
 </div>
 <br>
 
+
 <!-- Page Container -->
-<div class="w3-content w3-margin-top w3-padding-16" style="max-width:1400px;">
+<div class="w3-content w3-margin-top w3-center" style="max-width:1400px;">
   
-  <div class="w3-third">
-    <div class="sidepane">
-      <div id="site-title"><h1>Movie List</h1></div>
-      <input id="searchbox" class="form-control" type="text" size="15">
-      <button id="searchbutton" class="w3-btn w3-round w3-green">Search</button>
-      <button id="randombutton" class="w3-btn w3-round w3-blue">Random</button>
-      <div id="results-title"></div>
-      <div id="results-poster"></div>
-      <div id="results-table"></div>
+  <div class="w3-cell-row">
+    <div id="aboutme" class="w3-cell-center w3-blue-grey w3-margin-bottom">
+      <img src="assets/images/me.jpg" style="width: 40%">
+      <p style="width: 70%; margin-left: auto; margin-right: auto">
+        I am a hydro engineer, runner, computer wizard, volleyball fan, donut connoisseur, and man of faith. I grew up
+        in Arizona and am studying civil engineering at Brigham Young University. I love finding ways to
+        make the world a better place, whether that's in technical ways through engineering or anything else.
+      </p>
     </div>
   </div>
-  <div class="w3-twothird w3-grey">
-    <div class="moviepane">
-      <div class="row">
-        <div id="1" class="column"></div>
-        <div id="2" class="column"></div>
-        <div id="3" class="column"></div>
-        <div id="4" class="column"></div>
-        <div id="5" class="column"></div>
-        <div id="6" class="column"></div>
-      </div>
-    </div>
-  </div>
-</div>
+  
+</div>  <!-- End Page Container -->
+
+<footer class="w3-container w3-teal w3-center w3-margin-top">
+  <p>Find me on social media.</p>
+  <i class="fa fa-facebook-official w3-hover-opacity"></i>
+  <i class="fa fa-instagram w3-hover-opacity"></i>
+  <i class="fa fa-snapchat w3-hover-opacity"></i>
+  <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+  <i class="fa fa-twitter w3-hover-opacity"></i>
+  <i class="fa fa-linkedin w3-hover-opacity"></i>
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+</footer>
+
 </body>
 </html>
