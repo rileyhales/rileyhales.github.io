@@ -1,5 +1,6 @@
 # conda install google-api-python-client google-auth-httplib2 google-auth-oauthlib pandas
 import os
+import json
 import pickle
 import pandas
 import numpy
@@ -80,11 +81,7 @@ def get_id_url_from_tmdb(df, tmdb_api_key):
     return df
 
 
-def update_google_drive_sheet(sheet_id, sheet_range, credentials_json_path, df):
-    return
-
-
-def df_to_json(df):
+def df_to_js(df):
     # format for outputting a json
     df.index = df['Movie']
     del df['Movie']
@@ -103,5 +100,4 @@ if __name__ == '__main__':
 
     df = read_csv_from_google_drive(sheet_id, sheet_range, credentials_json_path)
     # df = get_id_url_from_tmdb(df, tmdb_api_key)
-    # update_google_drive_sheet(df)
-    df_to_json(df)
+    df_to_js(df)
