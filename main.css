@@ -14,24 +14,23 @@ img {
 .sidepane {
   display: flex;
   float: left;
-  width: 30%;
   flex-wrap: wrap;
-  padding: 2%;
+  padding: 1%;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
 }
 
 #searchbox {
-  width: 60%;
+  width: 59%;
 }
 #searchbutton {
-  width: 20%;
-  float: right;
+  width: 18%;
+  margin-left: 1%;
 }
 #randombutton {
   width: 20%;
-  float: right;
+  margin-left: 1%;
 }
 #site-title {
   width: 100%;
@@ -47,7 +46,7 @@ img {
   width: 60%;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 20px;
+  margin-top: 15px;
 }
 #results-table {
   margin-left: auto;
@@ -59,9 +58,7 @@ img {
 .moviepane {
   background-color: #cdcdcd;
   overflow: scroll;
-  height: 100vh;
-  float: right;
-  width: 70%;
+  height: 94vh;
 }
 .row {
   display: flex;

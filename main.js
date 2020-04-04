@@ -42,8 +42,8 @@ function searchMovies(movie) {
     } else {
         img_link = 'https://rileyhales.github.io/Placeholder.jpg';
     }
+    $("#results-title").html('<h3 class="w3-margin-top">' + movie + '</h3>');
     $("#results-poster").html('<a href=' + pg + ' target="_blank"><img class="poster" src=' + img_link + '></a>');
-    $("#results-title").html('<h3>' + movie + '</h3>');
     try {
         $("#results-table").html(makeTable(mvdb[movie]));
     } catch (e) {
