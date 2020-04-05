@@ -10,15 +10,15 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 
 
-def read_csv_from_google_drive(sheet_id, sheet_range, credentials_json_path):
+def read_csv_from_google_drive(sheet_id, sheet_range, token_pickle_path, credentials_json_path):
     # the spreadsheet info
     scopes = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
     creds = None
     # The file token.pickle stores the user's access and refresh tokens, and is created automatically when the
     # authorization flow completes for the first time.
-    if os.path.exists('token.pickle'):
-        with open('token.pickle', 'rb') as token:
+    if os.path.exists(token_pickle_path):
+        with open(token_pickle_path, 'rb') as token:
             creds = pickle.load(token)
     # If there are no (valid) credentials available, let the user log in.
     if not creds or not creds.valid:
@@ -28,7 +28,7 @@ def read_csv_from_google_drive(sheet_id, sheet_range, credentials_json_path):
             flow = InstalledAppFlow.from_client_secrets_file(credentials_json_path, scopes)
             creds = flow.run_local_server(port=0)
         # Save the credentials for the next run
-        with open('token.pickle', 'wb') as token:
+        with open(token_pickle_path, 'wb') as token:
             pickle.dump(creds, token)
 
     service = build('sheets', 'v4', credentials=creds)
@@ -81,23 +81,29 @@ def get_id_url_from_tmdb(df, tmdb_api_key):
     return df
 
 
-def df_to_js(df):
+def df_to_js(df, js):
     # format for outputting a json
     df.index = df['Movie']
     del df['Movie']
-    df.to_json('mvdb.js', orient='index')
-    with open('../mvdb.js', 'r') as f:
+    df.to_json(js, orient='index')
+    with open(js, 'r') as f:
         db = f.readline()
-    with open('../mvdb.js', 'w') as f:
+    with open(js, 'w') as f:
         f.write('mvdb=' + db + ';')
+    return
 
 
 if __name__ == '__main__':
     sheet_id = '1IwN6augG0fm6NG8-ddhMmBrinTOpgyCnNvLKCFJA4bI'
     sheet_range = 'MovieList!A:K'
-    credentials_json_path = 'sheetcredentials.json'
+
+    base_path = '/Users/rileyhales/rileyhales.github.io/'
+    workflow_path = os.path.join(base_path, 'assets', 'movie_update_workflow')
+
+    token_pickle_path = os.path.join(workflow_path, 'token.pickle')
+    credentials_json_path = os.path.join(workflow_path, 'sheetscredentials.json')
     tmdb_api_key = ''
 
-    df = read_csv_from_google_drive(sheet_id, sheet_range, credentials_json_path)
+    df = read_csv_from_google_drive(sheet_id, sheet_range, token_pickle_path, credentials_json_path)
     # df = get_id_url_from_tmdb(df, tmdb_api_key)
-    df_to_js(df)
+    df_to_js(df, os.path.join(base_path, 'movies', 'mvdb.js'))
