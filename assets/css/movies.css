@@ -18,18 +18,18 @@ img {
   text-align: center;
 }
 #search-box {
-  width: 60%;
+  width: 100%;
   float: left;
 }
 #search-button {
-  width: 18%;
-  margin-left: 1%;
-  float: left;
+  width: 35%;
+  margin-left: auto;
+  margin-right: auto;
 }
 #random-button {
-  width: 20%;
-  margin-left: 1%;
-  float: left;
+  width: 35%;
+  margin-left: auto;
+  margin-right: auto;
 }
 #results-title {
   width: 100%;

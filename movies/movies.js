@@ -11,6 +11,9 @@ function showOptions(db, movie) {
     let vudu = $("#opt-vudu");
     let file = $("#opt-file");
     let disc = $("#opt-disc");
+
+    $("#opt-formats").show();
+
     if (db['UHD']) {uhd.show()} else {uhd.hide()}
 
     if (db['MA']) {
@@ -24,6 +27,7 @@ function showOptions(db, movie) {
 
     if (db['MA'] || db['UV']) {
         vudu.show()
+        vudu.attr('href', vudu_search + movie)
     } else {
         vudu.hide()
     }
@@ -44,7 +48,7 @@ function addPosterRow(listOfMoviesToAdd) {
             } else {
                 img_link = 'https://rileyhales.github.io/assets/images/MoviePosterHolder.jpg';
             }
-            row += '<img id="' + movie + '" class="w3-container w3-col s6 m4 l2" src="' + img_link + '">';
+            row += '<img id="' + movie + '" class="w3-padding-small w3-col s6 m4 l2" src="' + img_link + '">';
         }
         row += end_row;
         $("#posters-div").append(row);
@@ -53,7 +57,7 @@ function addPosterRow(listOfMoviesToAdd) {
 function populatePosters() {
     let postersToAdd = Object.keys(mvdb);
     // add rows of 6 while there are at least 6 left
-    while (postersToAdd.length >= 6) {
+    while (postersToAdd.length > 6) {
         addPosterRow(postersToAdd.splice(0, 6));
     }
     // add the rest of the posters (row of less than 6)

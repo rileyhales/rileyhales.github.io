@@ -37,29 +37,26 @@
 <!-- Page Container -->
 <div class="w3-content w3-margin-top w3-light-grey" style="max-width:1400px; height: 95vh;">
   
-  <div id="sidepane" class="w3-third w3-padding w3-centered">
+  <div id="sidepane" class="w3-quarter w3-padding w3-centered">
     <h1>Movie List</h1>
     <div class="w3-margin-bottom" style="width: 100%">
       <input id="search-box" class="w3-input w3-border" type="text" size="15">
       <button id="search-button" class="w3-btn w3-round w3-green">Search</button>
       <button id="random-button" class="w3-btn w3-round w3-blue">Random</button>
     </div>
-    <br>
     <div id="results-title"></div>
     <div id="results-poster" class="w3-half w3-centered"></div>
     <div id="results-watchopts" class="w3-half w3-centered">
-      <h3>Formats</h3>
-      <div id="opt-uhd" style="display: none"><strong>Owned in UHD</strong><br></div>
-      <div>
-        <a id="opt-google" target="_blank" style="display: none;"><img src="http://info.momentfeed.com/rs/541-SAK-669/images/Google-logo-2015-G-icon.png" class="w3-half"></a>
-        <a id="opt-vudu" target="_blank" style="display: none"><img src="https://img.talkandroid.com/uploads/2016/08/vudu.png" class="w3-half"></a>
-        <span id="opt-file" class="w3-half" style="width: 100%; display: none"><i class="far fa-file-video" style="width: inherit"></i></span>
-        <span id="opt-disc" class="w3-half" style="width: 100%; display: none"><i class="fas fa-compact-disc" style="width: inherit"></i></span>
-      </div>
+      <h3 id="opt-formats" style="display: none">Formats</h3>
+      <button id="opt-uhd" class="w3-button w3-round-xlarge w3-orange" style="display: none"><i class="far fa-gem" style="width: inherit"></i> UHD</button>
+      <a id="opt-google" target="_blank" class="w3-button w3-round-xlarge w3-padding w3-teal" style="display: none"><i class="fa fa-google"></i> Google</a>
+      <a id="opt-vudu" target="_blank" class="w3-button w3-round-xlarge w3-padding w3-blue" style="display: none"><i class="fas fa-video"></i> Vudu</a>
+      <button id="opt-file" class="w3-button w3-round-xlarge w3-padding w3-purple" style="display: none"><i class="far fa-file-video" style="width: inherit"></i> File</button>
+      <button id="opt-disc" class="w3-button w3-round-xlarge w3-padding w3-red" style="display: none"><i class="fas fa-compact-disc" style="width: inherit"></i> Disc</button>
     </div>
   </div>
   
-  <div id="moviepane" class="w3-twothird w3-padding w3-grey">
+  <div id="moviepane" class="w3-threequarter w3-grey">
     <div id="posters-div" class="w3-padding-16" style="height: 95vh; overflow-y: scroll"></div>
   </div>
 
