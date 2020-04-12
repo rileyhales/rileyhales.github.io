@@ -94,7 +94,7 @@ def df_to_js(df, js):
 
 if __name__ == '__main__':
     sheet_id = '1IwN6augG0fm6NG8-ddhMmBrinTOpgyCnNvLKCFJA4bI'
-    sheet_range = 'MovieList!A:K'
+    sheet_range = 'MovieList!A:L'
 
     base_path = '/Users/rileyhales/rileyhales.github.io/'
     workflow_path = os.path.join(base_path, 'assets', 'movie_update_workflow')

@@ -37,8 +37,11 @@ img {
   margin-right: auto;
 }
 #results-poster {
-  width: 60%;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 15px;
+}
+#results-watchopts {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }

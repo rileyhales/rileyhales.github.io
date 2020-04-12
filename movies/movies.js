@@ -1,28 +1,35 @@
 const mvls = Object.keys(mvdb);
 const pg_base = 'https://themoviedb.org/movie/';
 const img_base = 'https://image.tmdb.org/t/p/w500';
+const google_search = 'https://play.google.com/store/search?c=movies&q=';
+const vudu_search = 'https://www.vudu.com/content/movies/search?searchString=';
+const google_link = 'https://play.google.com/store/movies/details?id=';
 
-function makeTable(db) {
-    let check = '<td><i class="fas fa-check"></i></td>';
-    let ban = '<td><i class="fas fa-ban"></i></td>';
-    let table = '<table class="w3-table-all" style="margin-left: auto; margin-right: auto"><tr><th>MoviesAnywhere</th><th>UltraHD</th><th>Disc</th></tr>';
+function showOptions(db, movie) {
+    let uhd = $("#opt-uhd");
+    let google = $("#opt-google");
+    let vudu = $("#opt-vudu");
+    let file = $("#opt-file");
+    let disc = $("#opt-disc");
+    if (db['UHD']) {uhd.show()} else {uhd.hide()}
+
     if (db['MA']) {
-        table += check
+        google.show();
+        if (db['Google-ID']) {
+            google.attr('href', google_link + db['Google-ID'])
+        } else {google.attr('href', google_search + movie)}
     } else {
-        table += ban
+        google.hide()
     }
-    if (db['UHD']) {
-        table += check
+
+    if (db['MA'] || db['UV']) {
+        vudu.show()
     } else {
-        table += ban
+        vudu.hide()
     }
-    if (db['Blu-Ray'] || db['DVD']) {
-        table += check
-    } else {
-        table += ban
-    }
-    table += '</table>';
-    return table
+
+    if (db['File']) {file.show();} else {file.hide()}
+    if (db['Blu-Ray'] || db['DVD']) {disc.show()} else {disc.hide()}
 }
 
 function addPosterRow(listOfMoviesToAdd) {
@@ -54,10 +61,8 @@ function populatePosters() {
 }
 
 function searchMovies(movie) {
-    if (!mvls.includes(movie)) {
-        return
-    }
-    let pg = pg_base + mvdb[movie]['ID'];
+    if (!mvls.includes(movie)) {return}
+    let pg = pg_base + mvdb[movie]['TMDB-ID'];
     let img_link;
     if (mvdb[movie]['Poster'] !== '') {
         img_link = img_base + mvdb[movie]['Poster'];
@@ -66,11 +71,7 @@ function searchMovies(movie) {
     }
     $("#results-title").html('<h3 class="w3-margin-top">' + movie + '</h3>');
     $("#results-poster").html('<a href=' + pg + ' target="_blank"><img class="poster" src=' + img_link + '></a>');
-    try {
-        $("#results-table").html(makeTable(mvdb[movie]));
-    } catch (e) {
-        $("#results-table").html('')
-    }
+    showOptions(mvdb[movie], movie)
 }
 
 $(document).ready(function () {
