@@ -5,20 +5,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" crossorigin="anonymous"></script>
   
-  <link rel="stylesheet" href="index.css">
-  
-  <style>
-    html, body, h1, h2, h3, h4, h5, h6 {
-      font-family: "Roboto", sans-serif
-    }
-  </style>
-
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+          integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+          crossorigin=""></script>
+  <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
 </head>
 <body>
-
 <!-- Navbar (sit on top) -->
 <div style="height: 5vh;">
   <div class="w3-bar w3-white w3-wide w3-padding w3-card w3-margin-bottom">
@@ -35,19 +32,11 @@
 </div>
 <br>
 
-
 <!-- Page Container -->
-<div class="w3-content w3-margin-top w3-center" style="max-width:1400px;">
-
-</div>  <!-- End Page Container -->
-
-<footer class="w3-container w3-teal w3-center w3-margin-top">
-  <p>Find me on social media</p>
-  <a href="https://facebook.com/rileyhales" target="_blank"><i class="fa fa-facebook-official w3-hover-opacity"></i></a>
-  <a href="https://instagram.com/rileyhales" target="_blank"><i class="fa fa-instagram w3-hover-opacity"></i></a>
-  <a href="https://www.linkedin.com/in/rileyhales/"><i class="fa fa-linkedin w3-hover-opacity"></i></a>
-  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
-</footer>
+<div style="height: available">
+  <div id="map" style="height: 90vh"></div>
+  <script src="travelmap.js"></script>
+</div>
 
 </body>
 </html>
