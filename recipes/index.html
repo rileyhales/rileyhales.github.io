@@ -64,7 +64,7 @@
     $(function () {
         $("#recipe-input-search").autocomplete({source: Object.keys(recipeOptions)});
     });
-    $("#search-button").click(function () {
+    $("#search-recipe").click(function () {
         $.get('/recipes/database/' + recipeOptions[(this).val()] + '.html', function (html) {
             $("#recipe").html(html)
         })
