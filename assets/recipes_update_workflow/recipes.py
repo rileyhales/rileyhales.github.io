@@ -3,21 +3,29 @@
 
 import os
 
-options = []
+options = {}
 
 base_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'recipes')
+if not os.path.exists(os.path.join(base_path, 'database')):
+    os.mkdir(os.path.join(base_path, 'database'))
 
 with open(os.path.join(os.path.dirname(__file__), 'recipes.html'), 'r') as r:
-    a = r.read()
-    a = a.split('<h1 id="')
-    for b in a:
-        recipename = b.split('"')[0]
+    html = r.read()
+    html = html.split('<h1 id="')
+    for recipe in html:
+        recipename = recipe.split('"')[0]
         if recipename == '':
             continue
-        with open(os.path.join(base_path, 'database', f'{recipename}.html'), 'w') as c:
-            c.write('<h1 id="' + b)
-        options.append([recipename, recipename.replace('-', ' ').title()])
-options.sort(key=lambda x: x[0])
+        ingedients, instructions = recipe.split('<h2 id="instructions')
+        ingedients = ingedients.replace('<p>', '<li>').replace('</p>', '</li>')
+        with open(os.path.join(base_path, 'database', f'{recipename}.html'), 'w') as r:
+            r.write(f'<h1 id="{ingedients}<h2 id="instructions{instructions}')
+        options[recipename.replace('-', ' ').title()] = recipename
+
 with open(os.path.join(base_path, 'recipes.js'), 'w') as js:
-    js.write('let recipeOptions=' + str(options))
-print(options)
+    sorted_string = 'let recipeOptions='
+    sorted_dict = {}
+    for i in sorted(options.keys()):
+        sorted_dict[i] = options[i]
+    js.write('let recipeOptions=' + str(sorted_dict))
+    print(sorted_dict)

@@ -6,8 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" crossorigin="anonymous"></script>
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"></head>
+  <link href="https://code.jquery.com/ui/1.12.1/themes/black-tie/jquery-ui.css" rel="stylesheet">
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
   <script type="text/javascript" src="recipes.js"></script>
+</head>
 <body>
 
 <!-- Navbar (sit on top) -->
@@ -32,24 +35,37 @@
     
     <!-- Left Column -->
     <div class="w3-third w3-light-grey" style="height: 95vh;">
-      <label for="recipe-select-list">Select A Recipe:</label>
-      <select class="form-control" id="recipe-select-list">
-        <option>Select a Recipe</option>
-      </select>
+      <div style="width: 80%; margin-left: auto; margin-right: auto">
+        <label for="recipe-select-list">Select A Recipe:</label>
+        <select class="form-control" id="recipe-select-list">
+          <option>Select a Recipe</option>
+        </select>
+        <br>
+        <input id="recipe-input-search" style="width: 100%; text-align: left" class="input-group-text" placeholder="Search for a recipe">
+        <button class="btn btn-primary" id="search-recipe" style="width: 100%">Search</button>
+      </div>
     </div>
-    
-    <!-- Right Column -->
+  
+      <!-- Right Column -->
     <div class="w3-twothird">
       <div id="recipe"></div>
     </div>
   
   <script>
     const recipeSelectList = $("#recipe-select-list");
-    recipeOptions.forEach(function(recipe){
-      recipeSelectList.append('<option value="' + recipe[0] +'">' + recipe[1] + '</option>')
-    })
+    Object.keys(recipeOptions).forEach(function(key) {
+          recipeSelectList.append('<option value="' + recipeOptions[key] + '">' + key + '</option>')
+        })
     recipeSelectList.change(function () {
         $.get('/recipes/database/' + $(this).val() + '.html', function (html) {
+            $("#recipe").html(html)
+        })
+    })
+    $(function () {
+        $("#recipe-input-search").autocomplete({source: Object.keys(recipeOptions)});
+    });
+    $("#search-button").click(function () {
+        $.get('/recipes/database/' + recipeOptions[(this).val()] + '.html', function (html) {
             $("#recipe").html(html)
         })
     })
