@@ -57,7 +57,7 @@
           recipeSelectList.append('<option value="' + recipeOptions[key] + '">' + key + '</option>')
         })
     recipeSelectList.change(function () {
-        $.get('/recipes/database/' + $(this).val() + '.html', function (html) {
+        $.get('/cookbook/database/' + $(this).val() + '.html', function (html) {
             $("#recipe").html(html)
         })
     })
@@ -65,7 +65,7 @@
         $("#recipe-input-search").autocomplete({source: Object.keys(recipeOptions)});
     });
     $("#search-recipe").click(function () {
-        $.get('/recipes/database/' + recipeOptions[$("#recipe-input-search").val()] + '.html', function (html) {
+        $.get('/cookbook/database/' + recipeOptions[$("#recipe-input-search").val()] + '.html', function (html) {
             $("#recipe").html(html)
         })
     })
