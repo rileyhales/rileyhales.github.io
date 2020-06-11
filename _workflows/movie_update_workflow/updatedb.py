@@ -134,20 +134,20 @@ if __name__ == '__main__':
     sheet_read_range = 'MovieList!A:L'
     sheet_write_range = 'MovieList!B:L'
 
-    base_path = '/Users/rileyhales/rileyhales.github.io/'
+    base_path = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 
     posters_dir = os.path.join(base_path, 'assets', 'MoviePosters')
 
-    workflow_path = os.path.join(base_path, 'assets', 'movie_update_workflow')
+    workflow_path = os.path.join(base_path, '_workflows', 'movie_update_workflow')
     token_pickle_path = os.path.join(workflow_path, 'token.pickle')
     credentials_json_path = os.path.join(workflow_path, 'sheetscredentials.json')
-    with open(os.path.join(workflow_path, 'tmdb_tokens.json'), 'r') as f:
-        tmdb_api_key = json.load(f)['v3token']
+    # with open(os.path.join(workflow_path, 'tmdb_tokens.json'), 'r') as f:
+    #     tmdb_api_key = json.load(f)['v3token']
 
     google_api_service = create_google_api_service(token_pickle_path, credentials_json_path)
     df = read_csv_from_google_drive(google_api_service, sheet_id, sheet_read_range)
-    download_posters(df, posters_dir)
+    # download_posters(df, posters_dir)
     # df = get_id_url_from_tmdb(df, tmdb_api_key)
-    df = update_movie_poster_path(df, tmdb_api_key)
+    # df = update_movie_poster_path(df, tmdb_api_key)
     update_google_sheets(google_api_service, sheet_id, sheet_write_range, df)
     df_to_js(df, os.path.join(base_path, 'movies', 'mvdb.js'))
