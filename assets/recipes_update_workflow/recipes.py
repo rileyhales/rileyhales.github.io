@@ -1,11 +1,11 @@
 # install pandoc
-# pandoc recipes.docx -o recipes.html
+# pandoc cookbook.docx -o cookbook.html
 
 import os
 
 options = {}
 
-base_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'recipes')
+base_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'cookbook')
 if not os.path.exists(os.path.join(base_path, 'database')):
     os.mkdir(os.path.join(base_path, 'database'))
 
