@@ -1,5 +1,5 @@
 # install pandoc
-# pandoc cookbook.docx -o cookbook.html
+# pandoc Jana\'s\ recipes.docx -o recipes.html
 
 import os
 
