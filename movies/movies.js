@@ -1,14 +1,14 @@
 const mvls = Object.keys(mvdb);
 const pg_base = 'https://themoviedb.org/movie/';
-const img_base = 'https://image.tmdb.org/t/p/w500';
+const img_base = 'https://image.tmdb.org/t/p/w500/';
 const google_search = 'https://play.google.com/store/search?c=movies&q=';
-const vudu_search = 'https://www.vudu.com/content/movies/search?searchString=';
+const fandangonow_search = 'https://www.fandangonow.com/#search='
 const google_link = 'https://play.google.com/store/movies/details?id=';
 
 function showOptions(db, movie) {
     let uhd = $("#opt-uhd");
     let google = $("#opt-google");
-    let vudu = $("#opt-vudu");
+    let fand = $("#opt-fandangonow");
     let file = $("#opt-file");
     let disc = $("#opt-disc");
 
@@ -26,10 +26,10 @@ function showOptions(db, movie) {
     }
 
     if (db['MA'] || db['UV']) {
-        vudu.show()
-        vudu.attr('href', vudu_search + movie)
+        fand.show()
+        fand.attr('href', fandangonow_search + movie)
     } else {
-        vudu.hide()
+        fand.hide()
     }
 
     if (db['File']) {file.show();} else {file.hide()}
@@ -43,10 +43,10 @@ function addPosterRow(listOfMoviesToAdd) {
     let row = start_row;
         for (let i in listOfMoviesToAdd) {
             let movie = listOfMoviesToAdd[i];
-            if (mvdb[movie]['Poster'] !== '') {
-                img_link = img_base + mvdb[movie]['Poster'];
-            } else {
+            if (mvdb[movie]['Poster'] === '') {
                 img_link = 'https://rileyhales.github.io/assets/images/MoviePosterHolder.jpg';
+            } else {
+                img_link = img_base + mvdb[movie]['Poster'] + '.jpg';
             }
             row += '<img id="' + movie + '" class="w3-padding-small w3-col s6 m4 l2" src="' + img_link + '">';
         }
@@ -66,12 +66,12 @@ function populatePosters() {
 
 function searchMovies(movie) {
     if (!mvls.includes(movie)) {return}
-    let pg = pg_base + mvdb[movie]['TMDB-ID'];
+    let pg = pg_base + mvdb[movie]['TMDB-ID'] + '.jpg';
     let img_link;
-    if (mvdb[movie]['Poster'] !== '') {
-        img_link = img_base + mvdb[movie]['Poster'];
-    } else {
+    if (mvdb[movie]['Poster'] === '') {
         img_link = 'https://rileyhales.com/assets/images/MoviePosterHolder.jpg';
+    } else {
+        img_link = img_base + mvdb[movie]['Poster'] + '.jpg';
     }
     $("#results-title").html('<h3 class="w3-margin-top">' + movie + '</h3>');
     $("#results-poster").html('<a href=' + pg + ' target="_blank"><img class="poster" src=' + img_link + '></a>');

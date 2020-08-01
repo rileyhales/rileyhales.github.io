@@ -5,7 +5,7 @@ import os
 
 options = {}
 
-base_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'cookbook')
+base_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'recipe')
 if not os.path.exists(os.path.join(base_path, 'database')):
     os.mkdir(os.path.join(base_path, 'database'))
 
