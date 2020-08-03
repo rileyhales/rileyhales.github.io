@@ -1,4 +1,4 @@
 .idea/
-_workflows/movie_update_workflow/*.json
-_workflows/movie_update_workflow/*.pickle
+_workflows/api_credentials/*.json
+_workflows/api_credentials/*.pickle
 *.csv

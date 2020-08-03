@@ -33,7 +33,7 @@ function showOptions(db, movie) {
     }
 
     if (db['File']) {file.show();} else {file.hide()}
-    if (db['Blu-Ray'] || db['DVD']) {disc.show()} else {disc.hide()}
+    if (db['Blu-ray'] || db['DVD']) {disc.show()} else {disc.hide()}
 }
 
 function addPosterRow(listOfMoviesToAdd) {
