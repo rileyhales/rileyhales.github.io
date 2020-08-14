@@ -6,34 +6,32 @@ const fandangonow_search = 'https://www.fandangonow.com/#search='
 const google_link = 'https://play.google.com/store/movies/details?id=';
 
 function showOptions(db, movie) {
-    let uhd = $("#opt-uhd");
-    let google = $("#opt-google");
-    let fand = $("#opt-fandangonow");
-    let file = $("#opt-file");
-    let disc = $("#opt-disc");
+    const google = $("#opt-google");
+    const fand = $("#opt-fandangonow");
+    const file = $("#opt-file");
+    const disc = $("#opt-disc");
+    const uhd = $("#opt-uhd");
+    const _3d = $("#opt-3d");
+    const extended = $("#opt-extended");
+    const unrated = $("#opt-unrated");
 
     $("#opt-formats").show();
 
-    if (db['UHD']) {uhd.show()} else {uhd.hide()}
-
-    if (db['MA']) {
+    if (db['Google']) {
         google.show();
         if (db['Google-ID']) {
             google.attr('href', google_link + db['Google-ID'])
-        } else {google.attr('href', google_search + movie)}
-    } else {
-        google.hide()
+        } else {
+            google.attr('href', google_search + movie)
+        }
     }
-
-    if (db['MA'] || db['UV']) {
-        fand.show()
-        fand.attr('href', fandangonow_search + movie)
-    } else {
-        fand.hide()
-    }
-
-    if (db['File']) {file.show();} else {file.hide()}
-    if (db['Blu-ray'] || db['DVD']) {disc.show()} else {disc.hide()}
+    if (db['Fandango']) {fand.show(); fand.attr('href', fandangonow_search + movie)} else {fand.hide()}
+    if (db['File']) {file.show()} else {file.hide()}
+    if (db['Disc']) {disc.show()} else {disc.hide()}
+    if (db['UHD']) {uhd.show()} else {uhd.hide()}
+    if (db['3D']) {_3d.show()} else {_3d.hide()}
+    if (db['Extended']) {extended.show()} else {extended.hide()}
+    if (db['Unrated']) {unrated.show()} else {unrated.hide()}
 }
 
 function addPosterRow(listOfMoviesToAdd) {
@@ -41,17 +39,17 @@ function addPosterRow(listOfMoviesToAdd) {
     let start_row = '<div class="w3-row w3-margin-bottom">';
     let end_row = '</div>';
     let row = start_row;
-        for (let i in listOfMoviesToAdd) {
-            let movie = listOfMoviesToAdd[i];
-            if (mvdb[movie]['Poster'] === '') {
-                img_link = 'https://rileyhales.github.io/assets/images/MoviePosterHolder.jpg';
-            } else {
-                img_link = img_base + mvdb[movie]['Poster'] + '.jpg';
-            }
-            row += '<img id="' + movie + '" class="w3-padding-small w3-col s6 m4 l2" src="' + img_link + '">';
+    for (let i in listOfMoviesToAdd) {
+        let movie = listOfMoviesToAdd[i];
+        if (mvdb[movie]['Poster'] === '') {
+            img_link = 'https://rileyhales.github.io/assets/images/MoviePosterHolder.jpg';
+        } else {
+            img_link = img_base + mvdb[movie]['Poster'] + '.jpg';
         }
-        row += end_row;
-        $("#posters-div").append(row);
+        row += '<img id="' + movie + '" class="w3-padding-small w3-col s6 m4 l2" src="' + img_link + '">';
+    }
+    row += end_row;
+    $("#posters-div").append(row);
 }
 
 function populatePosters() {
@@ -65,7 +63,9 @@ function populatePosters() {
 }
 
 function searchMovies(movie) {
-    if (!mvls.includes(movie)) {return}
+    if (!mvls.includes(movie)) {
+        return
+    }
     let pg = pg_base + mvdb[movie]['TMDB-ID'] + '.jpg';
     let img_link;
     if (mvdb[movie]['Poster'] === '') {

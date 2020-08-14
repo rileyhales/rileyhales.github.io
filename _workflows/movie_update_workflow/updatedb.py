@@ -9,6 +9,8 @@ from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 
+import rch
+
 
 def create_google_api_service(token_pickle_path, credentials_json_path):
     # the spreadsheet info
@@ -32,50 +34,6 @@ def create_google_api_service(token_pickle_path, credentials_json_path):
             pickle.dump(creds, token)
 
     return build('sheets', 'v4', credentials=creds)
-
-
-def read_google_sheet(service: build, sheet_id: str, sheet_range: str,
-                      filter_columns: int or list or tuple = None,
-                      filter_rows: int or list or tuple = None,
-                      columns_labeled: bool = True) -> pd.DataFrame:
-    # Call the Sheets API to get the spreadsheet data
-    sheet = service.spreadsheets()
-    result = sheet.values().get(spreadsheetId=sheet_id, range=sheet_range).execute()
-    values = result.get('values', [])
-
-    # make all the rows the same length
-    length = max(map(len, values))
-    array = np.array([xi + [''] * (length - len(xi)) for xi in values])
-
-    if filter_rows is not None:
-        array = np.delete(array, np.asarray(filter_rows) - 1, axis=0)  # subtract 1 -> sheets start at 1, np at 0
-    if filter_columns is not None:
-        array = np.delete(array, np.asarray(filter_columns) - 1, axis=1)
-
-    if columns_labeled:
-        columns = array[0]
-        array = np.delete(array, 0, axis=0)
-        return pd.DataFrame(array, columns=columns)
-    else:
-        return pd.DataFrame(array)
-
-
-def read_zachs_csv_from_google_drive(service, sheet_id, sheet_range):
-    # Call the Sheets API to get the spreadsheet data
-    sheet = service.spreadsheets()
-    result = sheet.values().get(spreadsheetId=sheet_id, range=sheet_range).execute()
-    values = result.get('values', [])
-
-    # make all the rows the same length
-    length = max(map(len, values))
-    array = np.array([xi + [''] * (length - len(xi)) for xi in values])
-
-    # delete the counter column, get the column names then delete them
-    array = np.delete(array, (0, 1), axis=0)
-    columns_labels = array[0]
-    array = np.delete(array, (0, array.shape[0] - 1), axis=0)
-
-    return pd.DataFrame(array, columns=columns_labels)
 
 
 def get_new_movie_from_tmdb(df, tmdb_api_key):
@@ -165,40 +123,48 @@ if __name__ == '__main__':
 
     # read my spreadsheet
     sheet_id = '1IwN6augG0fm6NG8-ddhMmBrinTOpgyCnNvLKCFJA4bI'
-    sheet_read_range = 'MovieList!A:L'
-    sheet_write_range = 'MovieList!B:L'
-    df_r = read_google_sheet(google_api_service, sheet_id, sheet_read_range, filter_columns=1)
+    df_r = rch.web.read_google_sheet(google_api_service, sheet_id, 'MovieList!A:L', skip_columns=1)
+    df_r.rename(columns={'MA': 'Google', 'UV': 'Fandango'}, inplace=True)
 
     # zach's google sheet
     sheet_id = '1iYR2OP20d9RUlmEPsCdN3ksHRWJTfNh59Bph3Lv_GVw'
-    sheet_read_range = 'Movies!A:H'
-    sheet_write_range = 'Movies!A:H'
-    df_z = read_zachs_csv_from_google_drive(google_api_service, sheet_id, sheet_read_range)
+    df_z = rch.web.read_google_sheet(google_api_service, sheet_id, 'Movies!A:H', skip_rows=(1, 2))
+    df_z.rename(columns={'Title': 'Movie', '3D Blu-ray': '3D', 'Google Play': 'Google',
+                         'Vudu': 'Fandango', '4K UHD': 'UHD'},
+                inplace=True)
+    del df_z['Movies Anywhere']
+    df_z.drop(index=max(df_z.index), inplace=True)
 
     # merge the two sheets together
-    df_z.rename(columns={'Title': 'Movie', 'Movies Anywhere': 'MA', }, inplace=True)
-    df_r = df_r.merge(df_z, how='outer', on=['Movie', 'MA', 'Blu-ray', 'DVD'])
+    df_r = df_r.merge(df_z, how='outer', on=['Movie', 'Google', 'Blu-ray', 'DVD', 'Fandango', 'UHD'])
+    # combine duplicate row entries
     df_r = df_r.groupby('Movie', as_index=False).aggregate('first')
     df_r.sort_values('Movie', inplace=True)
     df_r = df_r.reindex(columns=df_r.columns)
+    # merge bluray and dvd columns into the disc column
+    df_r['Disc'] = df_r['Blu-ray'].combine_first(df_r['DVD'])
+    del df_r['Blu-ray'], df_r['DVD']
     df_r.replace(np.nan, '', inplace=True)
 
     # read the master sheet
     sheet_id = '1STMqN8zF0rUsskwK5FCGFrmLRy_rdLd900_blI-T49s'
-    sheet_read_range = 'Sheet1!A:O'
-    sheet_write_range = 'Sheet1!A:O'
-    df_m = read_google_sheet(google_api_service, sheet_id, sheet_read_range, columns_labeled=True)
+    sheet_range = 'Sheet1!A:K'
+    df_m = rch.web.read_google_sheet(google_api_service, sheet_id, sheet_range)
+    print(df_m)
 
-    # todo merge the master sheet with mine and zach's sheet
+    # merge the new data with the master google sheet
+    df_m = df_m.merge(df_r, how='outer')
+    # combine duplicate row entries
+    df_m = df_m.groupby('Movie', as_index=False).aggregate('first')
+    df_m.sort_values('Movie', inplace=True)
+    df_m = df_m.reindex(columns=df_r.columns)
 
-    # get information about the movies from the tmdb api
+    # fill in missing information about the movies from the tmdb api
     df_m = get_new_movie_from_tmdb(df_m, tmdb_api_key)
     df_m['TMDB-ID'] = df_m['TMDB-ID'].astype(int, errors='ignore')
 
     # export the new master sheet to google sheets
-    update_google_sheets(google_api_service, sheet_id, sheet_write_range, df_m)
+    rch.web.write_google_sheet(df_m, google_api_service, sheet_id, sheet_range)
 
     # create a js file which the website will use
-    print(df_m)
-    print(df_m['Poster'])
     df_to_js(df_m, os.path.join(os.path.dirname(os.path.dirname(base_path)), 'movies', 'mvdb.js'))
