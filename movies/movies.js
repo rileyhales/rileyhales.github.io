@@ -2,7 +2,7 @@ const mvls = Object.keys(mvdb);
 const pg_base = 'https://themoviedb.org/movie/';
 const img_base = 'https://image.tmdb.org/t/p/w500/';
 const google_search = 'https://play.google.com/store/search?c=movies&q=';
-const fandangonow_search = 'https://www.fandangonow.com/#search='
+const fandangonow_search = 'https://www.fandangonow.com/#search=';
 const google_link = 'https://play.google.com/store/movies/details?id=';
 
 function showOptions(db, movie) {
@@ -24,7 +24,7 @@ function showOptions(db, movie) {
         } else {
             google.attr('href', google_search + movie)
         }
-    }
+    } else {google.hide()}
     if (db['Fandango']) {fand.show(); fand.attr('href', fandangonow_search + movie)} else {fand.hide()}
     if (db['File']) {file.show()} else {file.hide()}
     if (db['Disc']) {disc.show()} else {disc.hide()}

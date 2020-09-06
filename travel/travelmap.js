@@ -7,10 +7,9 @@ let map = L.map('map', {
     center: [25, -40],
 });
 
-const basemap = L.tileLayer('http://tile.stamen.com/terrain/{z}/{x}/{y}.jpg').addTo(map);
-basemaps = {"Basemap": basemap};
+const basemaps = {"Basemap": L.tileLayer('http://tile.stamen.com/terrain/{z}/{x}/{y}.jpg').addTo(map)};
 
-cisc_march_2019 = {
+const cisc_march_2019 = {
     "type": "FeatureCollection",
     "features": [
         {
@@ -47,7 +46,7 @@ cisc_march_2019 = {
         },
     ],
 };
-drcap2019 = {
+const drcap2019 = {
     "type": "FeatureCollection",
     "features": [
         {
@@ -157,7 +156,7 @@ drcap2019 = {
         },
     ],
 };
-byu = {
+const byu = {
     "type": "FeatureCollection",
     "features": [
         {
@@ -170,7 +169,7 @@ byu = {
         },
     ],
 };
-mission_firenze = {
+const mission_firenze = {
     "type": "FeatureCollection",
     "features": [
         {
@@ -247,7 +246,7 @@ mission_firenze = {
         },
     ],
 };
-mission_genova = {
+const mission_genova = {
     "type": "FeatureCollection",
     "features": [
         // {
@@ -292,7 +291,7 @@ mission_genova = {
         //     },
     ],
 };
-mission_ancona = {
+const mission_ancona = {
     "type": "FeatureCollection",
     "features": [
         // {
@@ -329,7 +328,7 @@ mission_ancona = {
         //     },
     ],
 };
-mission_milan = {
+const mission_milan = {
     "type": "FeatureCollection",
     "features": [
         // {
@@ -375,7 +374,7 @@ mission_milan = {
         },
     ],
 };
-childhood = {
+const childhood = {
     "type": "FeatureCollection",
     "features": [
         {
@@ -421,13 +420,13 @@ function onEachFeature(feature, layer) {
 }
 
 
-mission_firenze_layer = L.geoJSON(mission_firenze, {onEachFeature: onEachFeature});
-mission_genova_layer = L.geoJSON(mission_genova, {onEachFeature: onEachFeature});
-mission_ancona_layer = L.geoJSON(mission_ancona, {onEachFeature: onEachFeature});
-mission_milan_layer = L.geoJSON(mission_milan, {onEachFeature: onEachFeature});
-mission = L.layerGroup([mission_firenze_layer, mission_genova_layer, mission_ancona_layer, mission_milan_layer]).addTo(map);
+const mission_firenze_layer = L.geoJSON(mission_firenze, {onEachFeature: onEachFeature});
+const mission_genova_layer = L.geoJSON(mission_genova, {onEachFeature: onEachFeature});
+const mission_ancona_layer = L.geoJSON(mission_ancona, {onEachFeature: onEachFeature});
+const mission_milan_layer = L.geoJSON(mission_milan, {onEachFeature: onEachFeature});
+const mission = L.layerGroup([mission_firenze_layer, mission_genova_layer, mission_ancona_layer, mission_milan_layer]).addTo(map);
 
-trips = {
+const trips = {
     "Cuba Infrastructure Competition 3/2019": L.geoJSON(cisc_march_2019, {onEachFeature: onEachFeature}).addTo(map),
     "Dominican Republic Capstone 1/2019": L.geoJSON(drcap2019, {onEachFeature: onEachFeature}).addTo(map),
     "School at BYU 2014-2020": L.geoJSON(byu, {onEachFeature: onEachFeature}).addTo(map),
