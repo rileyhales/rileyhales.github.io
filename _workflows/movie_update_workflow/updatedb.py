@@ -2,7 +2,6 @@
 import os
 import json
 import pickle
-import pandas as pd
 import numpy as np
 import requests
 from googleapiclient.discovery import build
@@ -150,7 +149,6 @@ if __name__ == '__main__':
     sheet_id = '1STMqN8zF0rUsskwK5FCGFrmLRy_rdLd900_blI-T49s'
     sheet_range = 'Sheet1!A:K'
     df_m = rch.web.read_google_sheet(google_api_service, sheet_id, sheet_range)
-    print(df_m)
 
     # merge the new data with the master google sheet
     df_m = df_m.merge(df_r, how='outer')
@@ -162,6 +160,9 @@ if __name__ == '__main__':
     # fill in missing information about the movies from the tmdb api
     df_m = get_new_movie_from_tmdb(df_m, tmdb_api_key)
     df_m['TMDB-ID'] = df_m['TMDB-ID'].astype(int, errors='ignore')
+
+    # get a preview
+    print(df_m)
 
     # export the new master sheet to google sheets
     rch.web.write_google_sheet(df_m, google_api_service, sheet_id, sheet_range)
