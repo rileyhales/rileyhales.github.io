@@ -39,7 +39,7 @@ def get_new_movie_from_tmdb(df, tmdb_api_key):
     fails = []
     url = 'https://api.themoviedb.org/3/search/movie?'
     for movie in df['Movie']:
-        if df.loc[df['Movie'] == movie, 'TMDB-ID'].values[0] == '':
+        if df.loc[df['Movie'] == movie, 'idTMDB'].values[0] == '':
             params = {
                 'query': movie,
                 'language': 'en-US',
@@ -47,7 +47,7 @@ def get_new_movie_from_tmdb(df, tmdb_api_key):
             }
             try:
                 data = requests.get(url, params).json()
-                df.loc[df['Movie'] == movie, 'TMDB-ID'] = data['results'][0]['id']
+                df.loc[df['Movie'] == movie, 'idTMDB'] = data['results'][0]['id']
                 poster_name = str(data['results'][0]['poster_path']).replace('/', '').replace('.jpg', '')
                 df.loc[df['Movie'] == movie, 'Poster'] = poster_name
             except Exception as e:
@@ -57,7 +57,7 @@ def get_new_movie_from_tmdb(df, tmdb_api_key):
 
 def update_movie_poster_path(movie_df, tmdb_api_key):
     for movie in movie_df['Movie']:
-        url = f"https://api.themoviedb.org/3/movie/{movie_df.loc[movie_df['Movie'] == movie, 'TMDB-ID'].values[0]}?"
+        url = f"https://api.themoviedb.org/3/movie/{movie_df.loc[movie_df['Movie'] == movie, 'idTMDB'].values[0]}?"
         params = {'language': 'en-US', 'api_key': tmdb_api_key, }
         try:
             data = requests.get(url, params).json()
@@ -76,15 +76,6 @@ def update_google_sheets(service, sheet_id, sheet_range, df):
     result = service.spreadsheets().values().update(
         spreadsheetId=sheet_id, range=sheet_range, valueInputOption='RAW', body=body).execute()
     print('{0} cells updated.'.format(result.get('updatedCells')))
-    return
-
-
-def df_to_js(df, js):
-    # format for outputting a json
-    df.index = df['Movie']
-    del df['Movie']
-    with open(js, 'w') as f:
-        f.write('mvdb=' + df.to_json(orient='index') + ';')
     return
 
 
@@ -114,40 +105,40 @@ if __name__ == '__main__':
     token_pickle_path = os.path.join(os.path.dirname(base_path), 'api_credentials', 'token.pickle')
     credentials_json_path = os.path.join(os.path.dirname(base_path), 'api_credentials', 'sheetscredentials.json')
     with open(os.path.join(os.path.dirname(base_path), 'api_credentials', 'tmdb_tokens.json'), 'r') as f:
-        tmdb_api_key = json.loads(f.read())
-        tmdb_api_key = tmdb_api_key['v3token']
+        tmdb_api_key = json.loads(f.read())['v3token']
 
     # inititate google api service object
     google_api_service = create_google_api_service(token_pickle_path, credentials_json_path)
 
     # read my spreadsheet
     sheet_id = '1IwN6augG0fm6NG8-ddhMmBrinTOpgyCnNvLKCFJA4bI'
-    df_r = rch.web.read_google_sheet(google_api_service, sheet_id, 'MovieList!A:L', skip_columns=1)
-    df_r.rename(columns={'MA': 'Google', 'UV': 'Fandango'}, inplace=True)
+    df_r = rch.web.read_google_sheet(google_api_service, sheet_id, 'MovieList!A:L', skip_cols=1)
+    df_r.rename(columns={'MA': 'onGoogle', 'UV': 'onFandango', 'UHD': 'isUHD', 'File': 'onFile'}, inplace=True)
+    del df_r['Only On']
 
     # zach's google sheet
     sheet_id = '1iYR2OP20d9RUlmEPsCdN3ksHRWJTfNh59Bph3Lv_GVw'
     df_z = rch.web.read_google_sheet(google_api_service, sheet_id, 'Movies!A:H', skip_rows=(1, 2))
-    df_z.rename(columns={'Title': 'Movie', '3D Blu-ray': '3D', 'Google Play': 'Google',
-                         'Vudu': 'Fandango', '4K UHD': 'UHD'},
+    df_z.rename(columns={'Title': 'Movie', '3D Blu-ray': 'is3D', 'Google Play': 'onGoogle',
+                         'Vudu': 'onFandango', '4K UHD': 'isUHD'},
                 inplace=True)
     del df_z['Movies Anywhere']
     df_z.drop(index=max(df_z.index), inplace=True)
 
     # merge the two sheets together
-    df_r = df_r.merge(df_z, how='outer', on=['Movie', 'Google', 'Blu-ray', 'DVD', 'Fandango', 'UHD'])
+    df_r = df_r.merge(df_z, how='outer', on=['Movie', 'onGoogle', 'Blu-ray', 'DVD', 'onFandango', 'isUHD'])
     # combine duplicate row entries
     df_r = df_r.groupby('Movie', as_index=False).aggregate('first')
     df_r.sort_values('Movie', inplace=True)
     df_r = df_r.reindex(columns=df_r.columns)
     # merge bluray and dvd columns into the disc column
-    df_r['Disc'] = df_r['Blu-ray'].combine_first(df_r['DVD'])
+    df_r['onDisc'] = df_r['Blu-ray'].combine_first(df_r['DVD'])
     del df_r['Blu-ray'], df_r['DVD']
     df_r.replace(np.nan, '', inplace=True)
 
     # read the master sheet
     sheet_id = '1STMqN8zF0rUsskwK5FCGFrmLRy_rdLd900_blI-T49s'
-    sheet_range = 'Sheet1!A:K'
+    sheet_range = 'Sheet1!A:J'
     df_m = rch.web.read_google_sheet(google_api_service, sheet_id, sheet_range)
 
     # merge the new data with the master google sheet
@@ -159,7 +150,7 @@ if __name__ == '__main__':
 
     # fill in missing information about the movies from the tmdb api
     df_m = get_new_movie_from_tmdb(df_m, tmdb_api_key)
-    df_m['TMDB-ID'] = df_m['TMDB-ID'].astype(int, errors='ignore')
+    df_m['idTMDB'] = df_m['idTMDB'].astype(int, errors='ignore')
 
     # get a preview
     print(df_m)
@@ -168,4 +159,7 @@ if __name__ == '__main__':
     rch.web.write_google_sheet(df_m, google_api_service, sheet_id, sheet_range)
 
     # create a js file which the website will use
-    df_to_js(df_m, os.path.join(os.path.dirname(os.path.dirname(base_path)), 'movies', 'mvdb.js'))
+    df_m.index = df_m['Movie']
+    del df_m['Movie']
+    with open(os.path.join(os.path.dirname(os.path.dirname(base_path)), 'movies', 'mvdb.json'), 'w') as f:
+        f.write(df_m.to_json(orient='index'))

@@ -5,17 +5,8 @@
   <link rel="shortcut icon" href="../assets/images/me.jpg">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jquery-ui-dist@1.12.1/jquery-ui.min.js"></script>
-  
   <script src="https://kit.fontawesome.com/e4826c3ce4.js" crossorigin="anonymous"></script>
-  <script type="text/javascript" src="mvdb.js"></script>
-  <script type="text/javascript" src="movies.js"></script>
-  
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-ui-dist@1.12.1/jquery-ui.min.css" crossorigin="anonymous">
   <link rel="stylesheet" href="movies.css">
 </head>
 <body>
@@ -40,7 +31,8 @@
   <div id="sidepane" class="w3-third w3-padding w3-centered">
     <h1>Movie List</h1>
     <div class="w3-margin-bottom" style="width: 100%">
-      <input id="search-box" class="w3-input w3-border" type="text" size="15">
+      <input id="search-box" class="w3-input w3-border" type="text" size="15" autocomplete="" list="search-options">
+      <datalist id="search-options"></datalist>
       <button id="search-button" class="w3-btn w3-round w3-green">Search</button>
       <button id="random-button" class="w3-btn w3-round w3-blue">Random</button>
     </div>
@@ -54,14 +46,14 @@
       <button id="opt-disc" class="w3-button w3-round-xlarge w3-padding w3-green" style="display: none"><i class="fas fa-compact-disc" style="width: inherit"></i> Disc (DVD or Blu Ray)</button>
       <button id="opt-uhd" class="w3-button w3-round-xlarge w3-orange" style="display: none"><i class="far fa-gem" style="width: inherit"></i> UHD/4K</button>
       <button id="opt-3d" class="w3-button w3-round-xlarge w3-orange" style="display: none"><i class="fas fa-cubes" style="width: inherit"></i> 3D</button>
-      <button id="opt-extended" class="w3-button w3-round-xlarge w3-padding w3-red" style="display: none"><i class="fas fa-plus" style="width: inherit"></i> Extended Edition</button>
-      <button id="opt-unrated" class="w3-button w3-round-xlarge w3-padding w3-red" style="display: none"><i class="fa fa-ban" style="width: inherit"></i> Unrated Edition</button>
     </div>
   </div>
   
   <div id="moviepane" class="w3-twothird w3-grey">
-    <div id="posters-div" class="w3-padding-16" style="height: 95vh; overflow-y: scroll"></div>
+    <div id="posters-gallery" class="w3-padding-16" style="height: 95vh; overflow-y: scroll"></div>
   </div>
+
+  <script type="text/javascript" src="movies.js"></script>
 
 </div>
 </body>
