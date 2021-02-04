@@ -135,6 +135,6 @@ const MovieGallery = (function () {
 
 })();
 
-MovieGallery.init("http://localhost:63342/rileyhales.github.io/movies/mvdb.json")
+MovieGallery.init("https://rileyhales.com/movies/mvdb.json")
 document.getElementById("search-button").onclick = function () {MovieGallery.search(document.getElementById("search-box").value)};
 document.getElementById("random-button").onclick = function () {MovieGallery.random()};
