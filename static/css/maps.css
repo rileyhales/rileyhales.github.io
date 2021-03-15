@@ -1,0 +1,12 @@
+#map {
+    flex: 1 1 70%;
+    height: 100%;
+}
+#controls {
+    flex: 1 1 30%;
+    height: 100%;
+    padding: 2em;
+}
+#main-content {
+    display: flex;
+}

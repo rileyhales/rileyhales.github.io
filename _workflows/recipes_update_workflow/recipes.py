@@ -22,7 +22,7 @@ with open(os.path.join(os.path.dirname(__file__), 'recipes.html'), 'r') as r:
             r.write(f'<h1 id="{ingedients}<h2 id="instructions{instructions}')
         options[recipename.replace('-', ' ').title()] = recipename
 
-with open(os.path.join(base_path, 'recipes.js'), 'w') as js:
+with open(os.path.join(base_path, 'recipes.json'), 'w') as js:
     sorted_string = 'let recipeOptions='
     sorted_dict = {}
     for i in sorted(options.keys()):

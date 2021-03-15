@@ -1,0 +1,22 @@
+#gravatar-img {
+    text-align: center;
+}
+
+#edu > h5 {
+    font-weight: bold;
+}
+
+li {
+    margin-left: 2em;
+}
+
+#resume-content {
+    max-width: 80%;
+    margin: auto;
+}
+
+.resume-segment {
+    background-color: #FFFFFF;
+    padding: 1em;
+    border: 1px solid black;
+}

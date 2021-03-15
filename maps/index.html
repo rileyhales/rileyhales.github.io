@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <title>rileyhales.com</title>
+  <link rel="shortcut icon" href="/static/images/me.jpg">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="The personal website of Riley Hales containing a resume, simple databases, and misc tools">
+
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/maps.css">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+          integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+          crossorigin=""></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.js"></script>
+</head>
+
+<body>
+
+<nav id="navbar" class="navbar nav-pills nav-fill w-100 sticky-top">
+  <a class="nav-link" href="/"><i class="bi bi-house-fill"></i> Home</a>
+  <a class="nav-link" href="/resume/"><i class="bi bi-file-person"></i> Resume</a>
+  <a class="nav-link" href="/movies/"><i class="bi bi-film"></i> Movies</a>
+  <a class="nav-link" href="/recipe/"><i class="bi bi-journals"></i> Cooking</a>
+  <a class="nav-link" href="/maps/"><i class="bi bi-geo-alt-fill"></i> Maps</a>
+  <script type="text/javascript" src="/static/nav/nav.js"></script>
+</nav>
+
+<div id="main-content">
+  <div id="map"></div>
+  <div id="controls">
+    <select id="select-geojson" class="form-select-lg w-100">
+      <option value="" selected>Pick a Map Layer</option>
+    </select>
+    <hr>
+    <div class="input-group-text flex-fill">
+      <input id="input-json-url" type="text" placeholder="URL to GeoJSON">
+      <button id="btn-get-json" class="btn btn-success">Get GeoJSON</button>
+    </div>
+    <hr>
+    <div class="input-group-text flex-fill">
+      <input id="input-wms-url" type="text" placeholder="WMS URL">
+      <input id="input-wms-layer" type="text" placeholder="WMS Layer Name">
+      <button id="btn-get-wms" class="btn btn-success">Get WMS</button>
+    </div>
+    <hr>
+    <textarea id="textarea-json" class="form-control" placeholder="Paste and edit GeoJSON here" style="height: 100px"></textarea>
+    <button id="submit-json" class="btn btn-info">submit json</button>
+
+  </div>
+</div>
+
+<script type="text/javascript" src="map.js"></script>
+</body>
+
+</html>

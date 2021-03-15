@@ -42,7 +42,7 @@ const MovieGallery = (function () {
     const displayMovie = function (dbEntry, movie) {
         let img_link;
         if (mvdb[movie].poster === "") {
-            img_link = "https://rileyhales.com/assets/images/MoviePosterHolder.jpg";
+            img_link = "/static/images/MoviePosterHolder.jpg";
         } else {
             img_link = URL_tmdbPosterBase + mvdb[movie].poster + ".jpg";
         }
@@ -50,7 +50,7 @@ const MovieGallery = (function () {
         divPoster.innerHTML = `<a href="${URL_searchIMDB}${movie}" target="_blank"><img class="poster" src="${img_link}"></a>`;
 
         if (dbEntry.onGoogle) {
-            divOnGoogle.style.display = "";
+            divOnGoogle.style.display = "inline";
             if (dbEntry.idGoogle) {
                 divOnGoogle.setAttribute("href", `${URL_pageGoogle}${dbEntry.idGoogle}`);
             } else {
@@ -58,54 +58,55 @@ const MovieGallery = (function () {
             }
         }
         if (dbEntry.onFandango) {
-            divOnFand.style.display = "";
+            divOnFand.style.display = "inline";
             divOnFand.setAttribute("href", `${URL_searchFandango}${movie}`);
         }
-        if (dbEntry.onFile) {divOnFile.style.display = "";}
-        if (dbEntry.onDisc) {divOnDisc.style.display = "";}
-        if (dbEntry.isUHD) {divIsUHD.style.display = "";}
-        if (dbEntry.is3D) {divIs3D.style.display = "";}
+        if (dbEntry.onFile) {divOnFile.style.display = "inline";}
+        if (dbEntry.onDisc) {divOnDisc.style.display = "inline";}
+        if (dbEntry.isUHD) {divIsUHD.style.display = "inline";}
+        if (dbEntry.is3D) {divIs3D.style.display = "inline";}
     };
 
     function addPosterRow(listOfMoviesToAdd) {
         let img_link;
-        let row = `<div class="w3-row w3-margin-bottom">`;
+        let row = `<div class="row-cols-6">`;
         listOfMoviesToAdd.forEach(movie => {
             if (mvdb[movie].poster === "") {
                 img_link = "https://rileyhales.github.io/assets/images/MoviePosterHolder.jpg";
             } else {
                 img_link = URL_tmdbPosterBase + mvdb[movie].poster + ".jpg";
             }
-            row += `<img id="${movie}" onclick='MovieGallery.search(this.id)' class="w3-padding-small w3-col s6 m4 l2" src="${img_link}">`;
+            row += `<img id="${movie}" onclick='MovieGallery.search(this.id)' src="${img_link}">`;
         });
         row += "</div>";
         divGallery.innerHTML += row;
     }
 
     function populatePosters() {
-        let postersToAdd = Object.keys(mvdb);
-        // add rows of 6 while there are at least 6 left
-        while (postersToAdd.length > 6) {
-            addPosterRow(postersToAdd.splice(0, 6));
-        }
-        // add the rest of the posters (row of less than 6)
-        addPosterRow(postersToAdd)
+        let img_link;
+        mvls.forEach(movie => {
+            if (mvdb[movie].poster === "") {
+                img_link = "https://rileyhales.github.io/assets/images/MoviePosterHolder.jpg";
+            } else {
+                img_link = URL_tmdbPosterBase + mvdb[movie].poster + ".jpg";
+            }
+            divGallery.innerHTML += `<img class="poster" id="${movie}" onclick='MovieGallery.search(this.id)' src="${img_link}">`;
+        });
     }
 
     const init = function (url) {
-        let request = new XMLHttpRequest();
-        request.open("GET", url, true);
-        request.onload = function () {
-            if (request.status >= 200 && request.status < 400) {
-                mvdb = JSON.parse(request.response);
+        fetch(url)
+            .then(db => {return db.json()})
+            .then(db => {
+                mvdb = db;
                 mvls = Object.keys(mvdb);
                 mvls.forEach(mov => divSearchOptions.innerHTML += `<option>${mov}</option>`);
                 populatePosters();
-            } else {
-                alert("Unable to retrieve JSON movie database");
-            }
-        };
-        request.send();
+            })
+            .catch(error => {
+                console.log(error)
+                alert("Unable to retrieve database")
+            })
     };
 
     const search = function searchMovies(movie) {
@@ -114,7 +115,6 @@ const MovieGallery = (function () {
             alert("No matches for this search");
             return;
         }
-        console.log(movie)
         displayMovie(mvdb[movie], movie);
     };
 
@@ -127,14 +127,14 @@ const MovieGallery = (function () {
     };
 
     return {
-        "init": init,
-        "search": search,
-        "random": random,
-        "clear": clear
+        init,
+        search,
+        random,
+        clear
     };
 
 })();
 
-MovieGallery.init("http://localhost:63342/rileyhales.github.io/movies/mvdb.json")
+MovieGallery.init("/movies/mvdb.json")
 document.getElementById("search-button").onclick = function () {MovieGallery.search(document.getElementById("search-box").value)};
 document.getElementById("random-button").onclick = function () {MovieGallery.random()};

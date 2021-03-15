@@ -1,254 +1,136 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
+  <!-- Required meta tags -->
   <title>rileyhales.com</title>
-  <link rel="shortcut icon" href="../assets/images/me.jpg">
-  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="/static/images/me.jpg">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
-  
-  <script src="https://kit.fontawesome.com/e4826c3ce4.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" crossorigin="anonymous"></script>
-  <script type="text/javascript" src="jquery.gravatar.js"></script>
-  <script type="text/javascript">
-      $(document).ready(function () {
-          $('#avatar').empty().append($.gravatar({"size": $("#avatar").width()}));
-      });
-  </script>
-  
-  <style>
-      html, body, h1, h2, h3, h4, h5, h6 {
-          font-family: "Roboto", sans-serif
-      }
-  </style>
 
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/resume.css">
 </head>
-<body class="w3-light-grey">
 
-<!-- Navbar (sit on top) -->
-<div class="w3-bar w3-white w3-padding w3-card w3-wide">
-  <a href="https://rileyhales.com/" class="w3-bar-item w3-button">rileyhales.com</a>
-  <!-- Float links to the right. Hide them on small screens -->
-  <div class="w3-right w3-hide-small">
-    <a href="../" class="w3-bar-item w3-btn">Home</a>
-    <a href="../resume/" class="w3-bar-item w3-btn">Resume</a>
-    <a href="../movies/" class="w3-bar-item w3-btn">Movies</a>
-    <a href="../diving/" class="w3-bar-item w3-btn">Diving</a>
-    <a href="../travel/" class="w3-bar-item w3-btn">Travel</a>
-    <a href="../recipe/" class="w3-bar-item w3-btn">Cookbook</a>
+<body>
+
+<nav id="navbar" class="navbar nav-pills nav-fill w-100 sticky-top">
+  <a class="nav-link" href="/"><i class="bi bi-house-fill"></i> Home</a>
+  <a class="nav-link" href="/resume/"><i class="bi bi-file-person"></i> Resume</a>
+  <a class="nav-link" href="/movies/"><i class="bi bi-film"></i> Movies</a>
+  <a class="nav-link" href="/recipe/"><i class="bi bi-journals"></i> Cooking</a>
+  <a class="nav-link" href="/maps/"><i class="bi bi-geo-alt-fill"></i> Maps</a>
+  <script type="text/javascript" src="/static/nav/nav.js"></script>
+</nav>
+
+<div id="main-content">
+
+  <div id="resume-content" class="p-3">
+    <div id="int" class="row resume-segment">
+      <div id="gravatar-img" class="col-sm"></div>
+      <div id="about-icons" class="col-sm">
+        <p><img src="/static/icons/water.svg" style="height: 1.5em; width: 1.5em"> Hydro Engineering and Modeling
+        <p><img src="/static/icons/microchip.svg" style="height: 1.5em; width: 1.5em"> Data Science and Computer Wizardry
+        <p><img src="/static/icons/mathematics.svg" style="height: 1.5em; width: 1.5em"> Computational Engineering
+        <p><img src="/static/icons/donut.svg" style="height: 1.5em; width: 1.5em"> Donut Connoisseur
+        <p><img src="/static/icons/shoe.svg" style="height: 1.5em; width: 1.5em"> Aspiring Marathon Runner
+        <p><img src="/static/icons/real-estate.svg" style="height: 1.5em; width: 1.5em"> Provo, Utah
+      </div>
+      <div class="col-sm">
+        I am a hydro engineer, runner, computer wizard, volleyball fan, donut connoisseur, and man of faith. I grew up in Arizona and am studying civil engineering at Brigham
+        Young University. I love finding ways to make the world a better place, whether that's in technical ways through engineering or anything else.
+        <p><a href="resume.pdf" target="_blank">PDF resume</a>
+      </div>
+    </div>
+
+    <h1>Education</h1>
+    <div id="edu" class="row resume-segment">
+      <h5>PhD Candidate, Civil and Environmental Engineering - Brigham Young University</h5>
+      <ul>
+        <li>Research fully funded by NASA SERVIR Amazonia (Sistema Regional de Visualizacion y Monitoreo)</li>
+        <li>Develop solutions to actual water engineering challenges to stakeholders in the Amazon region through computational modeling, remote sensing,
+        </li>
+        <li>Anticipated Graduation: April 2024</li>
+      </ul>
+
+      <hr>
+      <h5>MS Civil And Environmental Engineering</h5>
+      <ul>
+        <li>April 2021</li>
+        <li>GPA: 4.0</li>
+      </ul>
+
+      <hr>
+      <h5>BS Civil and Environmental Engineering - Brigham Young University</h5>
+      <ul>
+        <li>Study Abroad & Senior Project - Dominican Republic (Winter 2019)</li>
+        <li>Graduated debt free through scholarships and working part-time</li>
+        <li>April 2020</li>
+        <li>GPA: 3.5</li>
+      </ul>
+    </div>
+
+    <h1>Work Experience</h1>
+    <div id="work" class="row resume-segment">
+      <h4>Hydroinformatics Researcher Apr 2018 - Current</h4>
+      <h6>GEOGloWS ECMWF Global Streamflow Service</h6>
+      <ul>
+        <li>Contributed to creating a daily operational, deterministic global hydrologic ensemble forecasting model</li>
+        <li>Collaborated with ESRI, ECMWF to move research project to a fully operational professional environment</li>
+        <li>Developed a REST API deployed at ECMWF for programmatic access to hydrologic modeling as a service</li>
+        <li>Programmed a python package and web apps which facilitate access to the model results</li>
+      </ul>
+      <h6>Hydrometeorological Data Web Apps</h6>
+      <ul>
+        <li>Create a flexible, extensible web application to show gridded earth observation datasets</li>
+        <li>Managed cloud computer resources and architecture, international deployment of products</li>
+        <li>Published GIS python package and web apps, and engineered scientific data processing workflows</li>
+        <li>Trained NASA sponsors and leaders of international hydrometeorology organizations</li>
+      </ul>
+      <h6>Disease Spread Prediction- Collaboration with Johns Hopkins University</h6>
+      <ul>
+        <li>Researched with an interdisciplinary team predicting malaria and enteric disease spread</li>
+        <li>Used remote sensing forecast data and land surface modeling to produce ensemble predictions of risk</li>
+        <li>Developed a web app make the modeling results accessible to stakeholders in India and Peru</li>
+      </ul>
+    </div>
+
+    <h1>Service and Volunteer Work</h1>
+    <div id="volunteer" class="row resume-segment">
+      <h5>ASCE BYU Student Chapter Officers- Networking Committee Apr 2018 - Apr 2019</h5>
+      <ul>
+        <li>Plan and coordinate networking events with engineering companies, students, BYU</li>
+        <li>Volunteer service to local K12 schools and after school programs promoting STEM</li>
+        <li>Spent several hours per week during school to planning and/or host student events</li>
+      </ul>
+
+      <hr>
+      <h5>BYU ASCE Concrete Canoe Team Aug 2017 – Apr 2018</h5>
+      <ul>
+        <li>Engineered and tested concrete specimens used in competition at national ASCE competitions</li>
+        <li>Participated in preparation and construction of the concrete canoe used in races</li>
+      </ul>
+
+      <hr>
+      <h5>Volunteer Missionary - Church of Jesus Christ of Latter-Day Saints Jan 2015 - Aug 2016 Milan, Italy</h5>
+      <ul>
+        <li>Unpaid, Full-time, representative of an international church and its practices in North Italy</li>
+        <li>Responsible for daily interactions with diverse cultures, languages, religions, educations</li>
+        <li>Taught daily spiritual lessons to church members and leaders, and others interested in gospel</li>
+        <li>Taught English and Italian reading and writing skills to refugees, immigrants, and Italians</li>
+        <li>Administered and taught church ordinances in the temple, the church's most sacred building</li>
+      </ul>
+    </div>
+
   </div>
 </div>
 
+<script>
+    const a = document.getElementById("gravatar-img")
+    a.innerHTML = `<img src="https://en.gravatar.com/userimage/179233610/092fc60b1f0269a4442db77fbb15a6b9.jpg?size=${.8 * a.offsetWidth}">`
+</script>
 
-<!-- Page Container -->
-<div class="w3-content w3-margin-top" style="max-width:1400px;">
-  
-  <!-- The Grid -->
-  <div class="w3-row-padding">
-    
-    <!-- Left Column -->
-    <div class="w3-third">
-      
-      <div class="w3-white w3-text-grey w3-card-4">
-        <div class="w3-display-container">
-          <div id="avatar" style="width: 80%; margin-right: auto; margin-left: auto"></div>
-          <div class="w3-display-bottommiddle w3-container w3-text-black">
-            <h2 style="color: white; text-shadow: black 0.1em 0.1em 0.2em">Riley Hales</h2>
-          </div>
-        </div>
-        <div class="w3-container">
-          <p><img src="../assets/icons/water.svg" style="height: 1.5em; width: 1.5em"> Hydro Engineering and Modeling</p>
-          <p><img src="../assets/icons/microchip.svg" style="height: 1.5em; width: 1.5em"> Data Science and Computer Wizardry</p>
-          <p><img src="../assets/icons/mathematics.svg" style="height: 1.5em; width: 1.5em"> Computational Engineering Modeling</p>
-          <p><img src="../assets/icons/donut.svg" style="height: 1.5em; width: 1.5em"> Donut Connoisseur</p>
-          <p><img src="../assets/icons/shoe.svg" style="height: 1.5em; width: 1.5em"> Aspiring Marathon Runner</p>
-          <p><img src="../assets/icons/real-estate.svg" style="height: 1.5em; width: 1.5em"> Provo, Utah</p>
-          <hr>
-          <p>I am a hydro engineer, runner, computer wizard, volleyball fan, donut connoisseur, and man of faith. I grew up in Arizona and am studying civil engineering at Brigham Young University. I
-            love finding ways to make the world a better place, whether that's in technical ways through engineering or anything else.</p>
-          <hr>
-          <li><a href="resume.pdf" target="_blank">PDF resume</a></li>
-          <hr>
-        
-        </div>
-      </div>
-      <br>
-      
-      <!-- End Left Column -->
-    </div>
-    
-    <!-- Right Column -->
-    <div class="w3-twothird">
-      
-      <!-- Education -->
-      <div class="w3-container w3-card w3-white w3-margin-bottom">
-        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-graduation-cap fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Education</h2>
-        
-        <div class="w3-container">
-          <h5 class="w3-opacity"><b>PhD Candidate, Civil and Environmental Engineering - Brigham Young University</b></h5>
-          <ul>
-            <li>Research fully funded by NASA SERVIR Amazonia (Sistema Regional de Visualizacion y Monitoreo)</li>
-            <li>Develop solutions to actual water engineering challenges to stakeholders in the Amazon region through computational modeling, remote sensing,
-            </li>
-            <li>Anticipated Graduation: April 2024</li>
-          </ul>
-          <hr>
-        </div>
-        
-        <div class="w3-container">
-          <h5 class="w3-opacity"><b>BS Civil and Environmental Engineering - Brigham Young University</b></h5>
-          <ul>
-            <li>Graduated debt free through scholarships and working part-time</li>
-            <li>April 2020</li>
-            <li>GPA: 3.5</li>
-          </ul>
-          <hr>
-        </div>
-        
-        <div class="w3-container">
-          <h5 class="w3-opacity"><b>Study Abroad & Senior Project - Dominican Republic</b></h5>
-          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Winter Semester 2019</h6>
-          <hr>
-        </div>
-      </div>
-      
-      <!-- Work Experience -->
-      <div class="w3-container w3-card w3-white w3-margin-bottom">
-        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Work Experience</h2>
-        <div class="w3-container">
-          
-          <h5 class="w3-opacity"><b>Hydroinformatics Researcher</b></h5>
-          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Apr 2018 - <span class="w3-tag w3-teal w3-round">Current</span></h6>
-          <h7>GEOGloWS ECMWF Global Streamflow Service</h7>
-          <ul>
-            <li>Contributed to creating a daily operational, deterministic global hydrologic ensemble forecasting model</li>
-            <li>Collaborated with ESRI, ECMWF to move research project to a fully operational professional environment</li>
-            <li>Developed a REST API deployed at ECMWF for programmatic access to hydrologic modeling as a service</li>
-            <li>Programmed a python package and web apps which facilitate access to the model results</li>
-          </ul>
-          <h7>Hydrometeorological Data Web Apps</h7>
-          <ul>
-            <li>Create a flexible, extensible web application to show gridded earth observation datasets</li>
-            <li>Managed cloud computer resources and architecture, international deployment of products</li>
-            <li>Published GIS python package and web apps, and engineered scientific data processing workflows</li>
-            <li>Trained NASA sponsors and leaders of international hydrometeorology organizations</li>
-          </ul>
-          <h7>Disease Spread Prediction- Collaboration with Johns Hopkins University</h7>
-          <ul>
-            <li>Researched with an interdisciplinary team predicting malaria and enteric disease spread</li>
-            <li>Used remote sensing forecast data and land surface modeling to produce ensemble predictions of risk</li>
-            <li>Developed a web app make the modeling results accessible to stakeholders in India and Peru</li>
-          </ul>
-          
-          <hr>
-        </div>
-      </div>
-      
-      <!-- Volunteer/Service Experience -->
-      <div class="w3-container w3-card w3-white w3-margin-bottom">
-        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Volunteer and Service Experience</h2>
-        <div class="w3-container">
-          <h5 class="w3-opacity"><b>ASCE BYU Student Chapter Officers- Networking Committee</b></h5>
-          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Apr 2018 - Apr 2019</h6>
-          <ul>
-            <li>Plan and coordinate networking events with engineering companies, students, BYU</li>
-            <li>Volunteer service to local K12 schools and after school programs promoting STEM</li>
-            <li>Spent several hours per week during school to planning and/or host student events</li>
-          </ul>
-          <h5 class="w3-opacity"><b>BYU ASCE Concrete Canoe Team</b></h5>
-          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Aug 2017 – Apr 2018</h6>
-          <ul>
-            <li>Engineered and tested concrete specimens used in competition at national ASCE competitions</li>
-            <li>Participated in preparation and construction of the concrete canoe used in races</li>
-          </ul>
-          <h5 class="w3-opacity"><b>Volunteer Missionary - Church of Jesus Christ of Latter-Day Saints</b></h5>
-          <h6 class="w3-text-teal">
-            <i class="fa fa-calendar fa-fw w3-margin-right"></i>Jan 2015 - Aug 2016
-            <i class="fa fa-map-marker fa-fw w3-margin-left w3-margin-right"></i></i>Milan, Italy
-          </h6>
-          <ul>
-            <li>Unpaid, Full-time, representative of an international church and its practices in North Italy</li>
-            <li>Responsible for daily interactions with diverse cultures, languages, religions, educations</li>
-            <li>Taught daily spiritual lessons to church members and leaders, and others interested in gospel</li>
-            <li>Taught English and Italian reading and writing skills to refugees, immigrants, and Italians</li>
-            <li>Administered and taught church ordinances in the temple, the church's most sacred building</li>
-          </ul>
-          
-          <hr>
-        </div>
-      </div>
-      
-      <!-- Publications -->
-      <div class="w3-container w3-card w3-white w3-margin-bottom">
-        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-book fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Publications</h2>
-        
-        <div class="w3-container">
-          <h5 class="w3-opacity">
-            <b>Enabling Stakeholder Decision-Making with Earth Observation and Modeling Data Using Tethys Platform</b>
-          </h5>
-          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>AGU Meeting Fall 2019</h6>
-          <h6 class="w3-text-teal">
-            <i class="fa fa-paperclip fa-fw w3-margin-right"></i>
-            <a href="https://agu.confex.com/agu/fm19/meetingapp.cgi/Paper/585941" target="_blank">Link to AGU</a>
-          </h6>
-          <hr>
-        </div>
-        
-        <div class="w3-container">
-          <h5 class="w3-opacity">
-            <b>Developing a drought monitoring and sub-seasonal to seasonal forecast system for South Asia</b>
-          </h5>
-          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>AGU Meeting Fall 2019</h6>
-          <h6 class="w3-text-teal">
-            <i class="fa fa-paperclip fa-fw w3-margin-right"></i>
-            <a href="https://agu.confex.com/agu/fm19/meetingapp.cgi/Paper/597593" target="_blank">Link to AGU</a>
-          </h6>
-          <hr>
-        </div>
-        
-        <div class="w3-container">
-          <h5 class="w3-opacity">
-            <b>Enabling Stakeholder Decision-Making with Earth Observation and Modeling Data Using Tethys Platform</b>
-          </h5>
-          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Frontiers in Environmental Science, 2019</h6>
-          <h6 class="w3-text-teal"><i class="fa fa-paperclip fa-fw w3-margin-right"></i>
-            DOI: <a href="https://doi.org/10.3389/fenvs.2019.00148" target="_blank">10.3389/fenvs.2019.00148</a>
-          </h6>
-          <hr>
-        </div>
-      </div>
-      
-      <!-- Exams Certificates -->
-      <div class="w3-container w3-card w3-white w3-margin-bottom">
-        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Exams</h2>
-        
-        <div class="w3-container">
-          <h5 class="w3-opacity"><b>GRE- 326/340</b></h5>
-          <h6 class="w3-text-teal">Quantitative: 165, Verbal: 161, Analytical Writing: 4</h6>
-          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>January 2020</h6>
-          <hr>
-        </div>
-      </div>
-      
-      <!-- End Right Column -->
-    </div>
-    
-    <!-- End Grid -->
-  </div>
-
-</div>  <!-- End Page Container -->
-
-<footer class="w3-container w3-teal w3-center w3-margin-top">
-  <p>Find me on social media</p>
-  <a href="https://facebook.com/rileyhales" target="_blank"><i class="fa fa-facebook-official w3-hover-opacity"></i></a>
-  <a href="https://instagram.com/rileyhales" target="_blank"><i class="fa fa-instagram w3-hover-opacity"></i></a>
-  <a href="https://www.linkedin.com/in/rileyhales/"><i class="fa fa-linkedin w3-hover-opacity"></i></a>
-  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
-  <br>
-  <div>Icons provided free courtesy of <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
-  </div>
-</footer>
+</div>
 
 </body>
+
 </html>

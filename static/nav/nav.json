@@ -1,0 +1,7 @@
+[
+  {"title": "<i class=\"bi bi-house-fill\"></i> Home", "href": "/"},
+  {"title": "<i class=\"bi bi-file-person\"></i> Resume", "href": "/resume/"},
+  {"title": "<i class=\"bi bi-film\"></i> Movies", "href": "/movies/"},
+  {"title": "<i class=\"bi bi-geo-alt-fill\"></i> Maps", "href": "/maps/"},
+  {"title": "<i class=\"bi bi-journals\"></i> Cooking", "href": "/cook/"}
+]

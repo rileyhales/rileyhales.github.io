@@ -11,25 +11,25 @@ from google.auth.transport.requests import Request
 import rch
 
 
-def create_google_api_service(token_pickle_path, credentials_json_path):
+def create_google_api_service(token_pickle, creds_json):
     # the spreadsheet info
     scopes = ['https://www.googleapis.com/auth/spreadsheets']
 
     creds = None
     # The file token.pickle stores the user's access and refresh tokens, and is created automatically when the
     # authorization flow completes for the first time.
-    if os.path.exists(token_pickle_path):
-        with open(token_pickle_path, 'rb') as token:
+    if os.path.exists(token_pickle):
+        with open(token_pickle, 'rb') as token:
             creds = pickle.load(token)
     # If there are no (valid) credentials available, let the user log in.
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
-            flow = InstalledAppFlow.from_client_secrets_file(credentials_json_path, scopes)
+            flow = InstalledAppFlow.from_client_secrets_file(creds_json, scopes)
             creds = flow.run_local_server(port=0)
         # Save the credentials for the next run
-        with open(token_pickle_path, 'wb') as token:
+        with open(token_pickle, 'wb') as token:
             pickle.dump(creds, token)
 
     return build('sheets', 'v4', credentials=creds)
@@ -52,6 +52,7 @@ def get_new_movie_from_tmdb(df, tmdb_api_key):
                 df.loc[df['Movie'] == movie, 'Poster'] = poster_name
             except Exception as e:
                 fails.append(movie)
+    print(f'Failed to retieve information for {fails}')
     return df
 
 

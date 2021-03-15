@@ -1,0 +1,91 @@
+h1 {
+    width: 100%;
+    margin: auto;
+    text-align: center;
+}
+
+img {
+    cursor: pointer;
+    width: 100%;
+}
+
+#search-box {
+    width: 100%;
+    float: left;
+}
+
+#search-button {
+    width: 35%;
+    margin: auto;
+}
+
+#random-button {
+    width: 35%;
+    margin: auto;
+}
+
+#results-title {
+    width: 100%;
+    margin: auto;
+}
+
+#results-poster {
+    margin: auto;
+}
+
+#results-watchopts {
+    margin: auto;
+    text-align: center;
+}
+
+#results-watchopts > a {
+    display: none;
+}
+
+#results-watchopts > button {
+    display: none;
+}
+
+#main-content {
+    display: flex;
+}
+
+#sidepane {
+    flex-direction: row;
+    flex: 1 0 30%;
+    min-width: 30%;
+    height: 100%;
+    margin: auto;
+    text-align: center;
+    border-right: black solid 2px;
+}
+
+#results-poster > a > img {
+    width: 50%;
+}
+
+#moviepane {
+    flex-direction: row;
+    flex: 0 1 70%;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+#posters-gallery {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 1em;
+}
+
+#posters-gallery > div {
+    margin: auto;
+}
+
+.poster {
+    margin: .4em;
+    max-width: 45%;
+    min-width: 10%;
+    flex: 1 1 0;
+}
