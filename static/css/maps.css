@@ -6,6 +6,8 @@
     flex: 1 1 30%;
     height: 100%;
     padding: 2em;
+    background-color: whitesmoke;
+    border-left: black 2px solid;
 }
 #main-content {
     display: flex;
