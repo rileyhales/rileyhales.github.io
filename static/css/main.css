@@ -40,7 +40,7 @@ body {
     background-color: white;
 }
 
-#main-content {
+#content {
     position: absolute;
     width: 100%;
     top: 3.5em;
@@ -49,6 +49,6 @@ body {
     overflow-y: scroll;
 }
 
-#main-content > div {
+#content > div {
     position: relative;
 }

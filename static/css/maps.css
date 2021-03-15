@@ -9,6 +9,6 @@
     background-color: whitesmoke;
     border-left: black 2px solid;
 }
-#main-content {
+#content {
     display: flex;
 }

@@ -1,7 +1,9 @@
-# install pandoc
+# install pandoc https://pandoc.org/installing.html
+# get a local copy of the recipes .docx and put it in THIS folder
 # pandoc Jana\'s\ recipes.docx -o recipes.html
 
 import os
+import json
 
 options = {}
 
@@ -23,9 +25,7 @@ with open(os.path.join(os.path.dirname(__file__), 'recipes.html'), 'r') as r:
         options[recipename.replace('-', ' ').title()] = recipename
 
 with open(os.path.join(base_path, 'recipes.json'), 'w') as js:
-    sorted_string = 'let recipeOptions='
     sorted_dict = {}
     for i in sorted(options.keys()):
         sorted_dict[i] = options[i]
-    js.write('let recipeOptions=' + str(sorted_dict))
-    print(sorted_dict)
+    js.write(json.dumps(sorted_dict))
