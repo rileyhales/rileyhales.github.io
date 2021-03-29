@@ -40,7 +40,6 @@ const MapApp = (function () {
             updateJsonDisplay();
         });
         map.on("draw:edited", function (e) {
-            // let layers = e.layers;
             updateJsonDisplay();
         });
 
