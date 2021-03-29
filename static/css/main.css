@@ -27,13 +27,11 @@ body {
 }
 #navbar > a {
     color: white;
-    border: none;
 }
 #navbar > a:hover {
     transition: background-color 400ms linear;
     background-color: #77abb7;
     color: black;
-    border: none;
 }
 #navbar > a.active {
     color: black;
