@@ -2,13 +2,31 @@
     flex: 1 1 70%;
     height: 100%;
 }
+
 #controls {
     flex: 1 1 30%;
     height: 100%;
-    padding: 2em;
+    padding: 1em;
     background-color: whitesmoke;
     border-left: black 2px solid;
 }
+
 #content {
     display: flex;
+    overflow-y: scroll;
+}
+
+#tab-content {
+    height: inherit;
+}
+
+#tab-wms > div, #btn-get-wms, #btn-get-legend {
+    margin: 5px 0;
+}
+
+textarea {
+    display: block;
+    font-family: monospace;
+    white-space: pre;
+    margin: 1em 0;
 }

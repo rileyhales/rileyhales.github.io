@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="/static/css/main.css">
   <link rel="stylesheet" href="/static/css/maps.css">
 
+  <script type="text/javascript" src="map.js" defer></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
         integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
         crossorigin=""/>
@@ -27,6 +28,20 @@
           crossorigin=""></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.css"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.js"></script>
+  <script>
+    function displayTab(showtab, activatebtn) {
+      const tabs = ["tab-wms", "tab-json", "tab-wfs", "btn-wms", "btn-json", "btn-wfs"]
+      tabs.forEach(tab => {
+        let element = document.getElementById(tab)
+        element.classList.remove("active")
+        element.classList.remove("show")
+      })
+      document.getElementById(activatebtn).classList.add("active")
+      document.getElementById(showtab).classList.add("active")
+      document.getElementById(showtab).classList.add("show")
+    }
+  </script>
+
 </head>
 
 <body>
@@ -39,74 +54,93 @@
   <a class="nav-link" href="/maps/"><i class="bi bi-geo-alt-fill"></i> Maps</a>
 </nav>
 
-<style>
-  .input-group {
-    padding: 3px 0;
-  }
-</style>
-
 <div id="content">
   <div id="map"></div>
 
   <div id="controls">
-    <select id="select-geojson" class="form-select-lg w-100">
-      <option value="" selected>Pick a Map Layer</option>
-    </select>
-    <hr>
-    <div class="input-group-text flex-fill">
-      <input id="input-json-url" type="text" placeholder="URL to GeoJSON">
-      <button id="btn-get-json" class="btn btn-success">Get GeoJSON</button>
-    </div>
 
-    <hr>
-    <div class="input-group input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text">URL</span>
-      </div>
-      <input id="input-wms-url" type="text" class="form-control" placeholder="WMS endpoint">
-    </div>
-
-    <div class="input-group input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Layer</span>
-      </div>
-      <input id="input-wms-layer" type="text" class="form-control" placeholder="layer name" value="Temperature_potential_vorticity_surface">
-    </div>
-
-    <div class="input-group input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Range</span>
-      </div>
-      <input id="input-wms-min" type="number" class="form-control" placeholder="minimum" value="0">
-      <input id="input-wms-max" type="number" class="form-control" placeholder="maximum" value="10">
-    </div>
-
-    <div class="input-group input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Color</span>
-      </div>
-      <input id="input-wms-colorscheme" type="text" class="form-control" placeholder="boxfill/rainbow">
-    </div>
-
-    <div class="input-group input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Opacity</span>
-      </div>
-      <input id="input-wms-opacity" type="range" class="form-control" min="0" max="1" value="1" step=".01">
-    </div>
-
-    <button id="btn-get-wms" class="btn btn-success">Add WMS Layer</button>
-    <button id="btn-get-legend" class="btn btn-success">Add Legend (THREDDS)</button>
-
+    <ul class="nav nav-tabs nav-justified" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="btn-wms" data-toggle="tab" role="tab" onclick="displayTab('tab-wms', 'btn-wms')">WMS Layer</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="btn-json" data-toggle="tab" role="tab" onclick="displayTab('tab-json', 'btn-json')">Draw & Edit JSON</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="btn-wfs" data-toggle="tab" role="tab" onclick="displayTab('tab-wfs', 'btn-wfs')">Online JSON</a>
+      </li>
+    </ul>
     <hr>
 
-    <textarea id="textarea-json" class="form-control" placeholder="Paste and edit GeoJSON here" style="height: 100px"></textarea>
-    <button id="submit-json" class="btn btn-info">submit json</button>
+    <div class="tab-content">
 
+      <div class="tab-pane fade show active" id="tab-wms" role="tabpanel">
+        <div class="input-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">URL</span>
+          </div>
+          <input id="input-wms-url" type="text" class="form-control" placeholder="WMS endpoint">
+        </div>
+
+        <div class="input-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Layer</span>
+          </div>
+          <input id="input-wms-layer" type="text" class="form-control" placeholder="layer name">
+        </div>
+
+        <div class="input-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Range</span>
+          </div>
+          <input id="input-wms-min" type="number" class="form-control" placeholder="minimum">
+          <input id="input-wms-max" type="number" class="form-control" placeholder="maximum">
+        </div>
+
+        <div class="input-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Color</span>
+          </div>
+          <input id="input-wms-colorscheme" type="text" class="form-control" placeholder="e.g. boxfill/rainbow">
+        </div>
+
+        <div class="input-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Opacity</span>
+          </div>
+          <input id="input-wms-opacity" type="range" class="form-control" min="0" max="1" value="1" step=".01">
+        </div>
+
+        <button id="btn-get-wms" class="btn btn-success w-100">Add WMS Layer</button>
+        <button id="btn-get-legend" class="btn btn-success w-100">Add Legend (THREDDS)</button>
+
+        <hr>
+
+        <a href="https://thredds.ucar.edu/thredds/catalog.html" target="_blank">UCAR THREDDS Server</a>
+        <li><a href="#" onclick="MapApp.autofillWmsInputs('gfs')">Autofill - GFS 1/4 Degree Best</a></li>
+        <li><a href="#" onclick="MapApp.autofillWmsInputs('gfs-temp')">Autofill - GFS 1/4 Degree Best - Air Temperature</a></li>
+      </div>
+
+      <div class="tab-pane fade" id="tab-json" role="tabpanel">
+        <button id="submit-json" class="btn btn-info w-100">submit json</button>
+        <textarea id="textarea-json" class="form-control" placeholder="Paste and edit GeoJSON here" rows=30></textarea>
+      </div>
+
+      <div class="tab-pane fade" id="tab-wfs" role="tabpanel">
+        <select id="select-geojson" class="form-select-lg w-100">
+          <option value="" selected>Pick a Map Layer</option>
+        </select>
+        <hr>
+        <div class="input-group-text flex-fill">
+          <input id="input-json-url" type="text" placeholder="URL to GeoJSON">
+          <button id="btn-get-json" class="btn btn-success">Get GeoJSON</button>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>
 
-<script type="text/javascript" src="map.js"></script>
 </body>
 
 </html>

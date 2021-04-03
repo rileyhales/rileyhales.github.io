@@ -6,6 +6,15 @@ const MapApp = (function () {
     const URL_OPENSTREETMAP = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
     const URL_STATICGJ = "/static/geojson/";
     const URL_GEOJSONDIRECTORY = `${URL_STATICGJ}directory.json`;
+    // WMS Shortcuts
+    const URL_UCAR_GFS = "https://thredds.ucar.edu/thredds/wms/grib/NCEP/GFS/Global_0p25deg/Best"
+    const AUTOFILL_GFS = {
+        url: URL_UCAR_GFS,
+        layer: "Temperature_surface",
+        min: 225,
+        max: 350,
+        color: "boxfill/alg2",
+    }
     // Get JSON from URL
     const DIV_SElECTGJ = document.getElementById("select-geojson");
     const INPUT_JSON_URL = document.getElementById("input-json-url");
@@ -38,7 +47,7 @@ const MapApp = (function () {
     const legend = L.control({position: 'bottomright'});
     legend.onAdd = () => {
         let div = L.DomUtil.create('div', 'legend');
-        let url = `${INPUT_WMS_URL.value}?REQUEST=GetLegendGraphic&LAYER=${INPUT_WMS_LAYER.value}&PALETTE=${INPUT_WMS_COLOR.value}&COLORSCALERANGE=${INPUT_WMS_MIN.value},${INPUT_WMS_MAX.value}`;
+        let url = `${INPUT_WMS_URL.value}?REQUEST=GetLegendGraphic&LAYER=${INPUT_WMS_LAYER.value}&PALETTE=${INPUT_WMS_COLOR.value.replace('boxfill/', '')}&COLORSCALERANGE=${INPUT_WMS_MIN.value},${INPUT_WMS_MAX.value}`;
         div.innerHTML = `<img src="${url}" alt="legend" style="width:100%; float:right;">`
         return div
     };
@@ -82,6 +91,10 @@ const MapApp = (function () {
         BTN_GETLEGEND.addEventListener("click", () => {
             addLegend();
         });
+        INPUT_WMS_OPAC.addEventListener("change", () => {
+            if (layerWMS === null) {return}
+            layerWMS.setOpacity(INPUT_WMS_OPAC.value)
+        })
     }
 
     const onEachFeature = function (feature, layer) {
@@ -158,16 +171,27 @@ const MapApp = (function () {
     }
 
     const updateJsonDisplay = function () {
-        INPUT_EDITJSON.innerText = JSON.stringify(layerDraw.toGeoJSON(), null, 2)
+        INPUT_EDITJSON.value = JSON.stringify(layerDraw.toGeoJSON(), null, 2)
     };
     const addInputJson = function (json) {
         layerDraw.clearLayers();
         layerDraw.addLayer(L.geoJSON(json));
     };
+    const autofillWmsInputs = function (config) {
+        if (config === "gfs") {
+            INPUT_WMS_URL.value = AUTOFILL_GFS.url
+        } else if (config === "gfs-temp") {
+            INPUT_WMS_URL.value = AUTOFILL_GFS.url
+            INPUT_WMS_LAYER.value = AUTOFILL_GFS.layer
+            INPUT_WMS_MIN.value = AUTOFILL_GFS.min
+            INPUT_WMS_MAX.value = AUTOFILL_GFS.max
+            INPUT_WMS_COLOR.value = AUTOFILL_GFS.color
+        }
+    }
 
     return {
         init,
-        layerWMS,
+        autofillWmsInputs
     };
 
 }());
