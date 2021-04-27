@@ -1,11 +1,25 @@
 const MapApp = (function () {
-    "use strict";
+    "use strict"
 
+    // Basemaps
+    const URL_OPENSTREETMAP = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+    const ATTRIBUTION_OPEN_STREET_MAP = {attribution: '&copy <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}
+    const URL_STAMEN_TERRAIN = "https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.jpg"
+    const URL_STAMEN_WATERCOLOR = "https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg"
+    const basemaps = {
+        "Open Street Maps": L.tileLayer(URL_OPENSTREETMAP, ATTRIBUTION_OPEN_STREET_MAP),
+        "Stamen Water Color": L.tileLayer(URL_STAMEN_WATERCOLOR),
+        "Stamen Terrain": L.tileLayer(URL_STAMEN_TERRAIN),
+        "ESRI World Imagery": L.esri.basemapLayer('Imagery'),
+        "ESRI Labeled World Imagery": L.layerGroup([L.esri.basemapLayer('Imagery'), L.esri.basemapLayer('ImageryLabels')]),
+        "ESRI Terrain": L.esri.basemapLayer('Terrain'),
+        "ESRI Labeled Terrain": L.layerGroup([L.esri.basemapLayer('Terrain'), L.esri.basemapLayer('ImageryLabels')]),
+    }
     // URLs and Paths
-    const DIV_MAP = "map";
-    const URL_OPENSTREETMAP = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
-    const URL_STATICGJ = "/static/geojson/";
-    const URL_GEOJSONDIRECTORY = `${URL_STATICGJ}directory.json`;
+    const DIV_MAP = "map"
+    const URL_STATICGJ = "/static/geojson/"
+    const URL_MYGEOJSONS = `${URL_STATICGJ}directory.json`
+    const URL_ESRI_COUNTRY_LIST = `${URL_STATICGJ}esri-countries-service.json`
     // WMS Shortcuts
     const URL_UCAR_GFS = "https://thredds.ucar.edu/thredds/wms/grib/NCEP/GFS/Global_0p25deg/Best"
     const AUTOFILL_GFS = {
@@ -16,107 +30,187 @@ const MapApp = (function () {
         color: "boxfill/alg2",
     }
     // Get JSON from URL
-    const DIV_SElECTGJ = document.getElementById("select-geojson");
-    const INPUT_JSON_URL = document.getElementById("input-json-url");
+    const SELECT_MYGEOJSON = document.getElementById("select-geojson")
+    const INPUT_JSON_URL = document.getElementById("input-json-url")
+    // ESRI Services
+    const INPUT_SEARCH_COUNTRY = document.getElementById("esri-country-input")
+    const URL_ESRI_COUNTRY_SERVICE = "https://services.arcgis.com/P3ePLMYs2RVChkJx/ArcGIS/rest/services/World__Countries_Generalized_analysis_trim/FeatureServer/0"
+    let layerEsriCountry = null
+    const DATALIST_ESRI_COUNTRIES = document.getElementById("list-esri-countries")
+    const BTN_SHOW_ESRI_COUNTRY = document.getElementById("btn-show-esri-country")
+    // Find Location
+    const BTN_FIND_LOCATION = document.getElementById("btn-find-location")
+    const INPUT_FIND_LATITUDE = document.getElementById("input-find-lat")
+    const INPUT_FIND_LONGITUDE = document.getElementById("input-find-lon")
+    let LAYER_FIND_MARKER = null;
     // WMS Buttons and Inputs
-    const BTN_GETWMS = document.getElementById("btn-get-wms");
-    const BTN_GETLEGEND = document.getElementById("btn-get-legend");
-    const INPUT_WMS_URL = document.getElementById("input-wms-url");
-    const INPUT_WMS_LAYER = document.getElementById("input-wms-layer");
-    const INPUT_WMS_MIN = document.getElementById("input-wms-min");
-    const INPUT_WMS_MAX = document.getElementById("input-wms-max");
-    const INPUT_WMS_OPAC = document.getElementById("input-wms-opacity");
-    const INPUT_WMS_COLOR = document.getElementById("input-wms-colorscheme");
+    const BTN_GET_WMS = document.getElementById("btn-get-wms")
+    const BTN_GET_LEGEND = document.getElementById("btn-get-legend")
+    const INPUT_WMS_URL = document.getElementById("input-wms-url")
+    const INPUT_WMS_LAYER = document.getElementById("input-wms-layer")
+    const INPUT_WMS_MIN = document.getElementById("input-wms-min")
+    const INPUT_WMS_MAX = document.getElementById("input-wms-max")
+    const INPUT_WMS_OPAC = document.getElementById("input-wms-opacity")
+    const INPUT_WMS_COLOR = document.getElementById("input-wms-colorscheme")
     // Draw/Edit GeoJSON
-    const INPUT_EDITJSON = document.getElementById("textarea-json");
-    const BTN_GETJSON = document.getElementById("btn-get-json");
-    const BTN_EDITJSON = document.getElementById("submit-json");
+    const INPUT_EDIT_JSON = document.getElementById("textarea-json")
+    const BTN_GET_JSON = document.getElementById("btn-get-json")
+    const BTN_EDIT_JSON = document.getElementById("json-submit")
+    const BTN_SAVE_JSON = document.getElementById("json-save")
 
-    const layerOSM = L.tileLayer(URL_OPENSTREETMAP, {attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'});
-    const basemaps = {"Open Street Maps": layerOSM};
-    let layerGeoJSON = L.geoJSON();
-    let layerWMS = null;
-    let layerDraw = new L.FeatureGroup();
-    let layerControl;
+    let LAYER_GEOJSON = L.geoJSON()
+    let LAYER_WMS = null
+    let LAYER_DRAW = new L.FeatureGroup()
+    let layerControl
     let drawControl = new L.Control.Draw({
         edit: {
-            featureGroup: layerDraw
+            featureGroup: LAYER_DRAW
         }
-    });
-    let map;
-    const legend = L.control({position: 'bottomright'});
+    })
+    let map
+    const legend = L.control({position: 'bottomright'})
     legend.onAdd = () => {
-        let div = L.DomUtil.create('div', 'legend');
-        let url = `${INPUT_WMS_URL.value}?REQUEST=GetLegendGraphic&LAYER=${INPUT_WMS_LAYER.value}&PALETTE=${INPUT_WMS_COLOR.value.replace('boxfill/', '')}&COLORSCALERANGE=${INPUT_WMS_MIN.value},${INPUT_WMS_MAX.value}`;
-        div.innerHTML = `<img src="${url}" alt="legend" style="width:100%; float:right;">`
+        let div = L.DomUtil.create('div')
+        let url = `${INPUT_WMS_URL.value}?REQUEST=GetLegendGraphic&LAYER=${INPUT_WMS_LAYER.value}&PALETTE=${INPUT_WMS_COLOR.value.replace('boxfill/', '')}&COLORSCALERANGE=${INPUT_WMS_MIN.value},${INPUT_WMS_MAX.value}`
+        div.innerHTML = `<img src="${url}" alt="legend" style="width:100% float:right">`
         return div
-    };
-
-    const init = function () {
-        map = L.map(DIV_MAP).setView([40.51073, -96.4247], 4);
-        layerOSM.addTo(map);
-
-        layerControl = L.control.layers(basemaps, {"Drawn Items": layerDraw.addTo(map)});
-        layerControl.addTo(map);
-
-        map.addControl(drawControl);
-        map.on("draw:created", function (event) {
-            layerDraw.addLayer(event.layer);
-            updateJsonDisplay();
-        });
-        map.on("draw:edited", function (e) {
-            updateJsonDisplay();
-        });
-
-        readGeoJsonDirectory();
-        initEvents();
-    };
-
-    const initEvents = function () {
-        DIV_SElECTGJ.addEventListener("change", () => {
-            addGeoJSON(`${URL_STATICGJ}${DIV_SElECTGJ.value}`, DIV_SElECTGJ.options[DIV_SElECTGJ.selectedIndex].text);
-        });
-        BTN_GETJSON.addEventListener("click", () => {
-            addGeoJSON(INPUT_JSON_URL.value, "Provided JSON URL");
-        });
-        BTN_GETWMS.addEventListener("click", () => {
-            addWMS(INPUT_WMS_URL.value, INPUT_WMS_LAYER.value, "Provided WMS URL");
-        });
-        BTN_EDITJSON.addEventListener("click", () => {
-            addInputJson(JSON.parse(INPUT_EDITJSON.value));
-        });
-        BTN_EDITJSON.addEventListener("click", () => {
-            addInputJson(JSON.parse(INPUT_EDITJSON.value));
-        });
-        BTN_GETLEGEND.addEventListener("click", () => {
-            addLegend();
-        });
-        INPUT_WMS_OPAC.addEventListener("change", () => {
-            if (layerWMS === null) {return}
-            layerWMS.setOpacity(INPUT_WMS_OPAC.value)
-        })
+    }
+    const latLonPopUp = L.control({position: 'bottomleft'})
+    let latLonDivElement
+    latLonPopUp.onAdd = () => {
+        return L.DomUtil.create('div', 'mouse-position')
     }
 
-    const onEachFeature = function (feature, layer) {
-        if (feature.properties) {
-            layer.bindPopup(feature.properties.name);
+    const init = function () {
+        map = L.map(DIV_MAP).setView([0, 0], 2)
+        basemaps[Object.keys(basemaps)[0]].addTo(map)
+
+        layerControl = L.control.layers(basemaps, {"Drawn Items": LAYER_DRAW.addTo(map)}, {collapsed: false})
+        layerControl.addTo(map)
+
+        map.addControl(drawControl)
+        initClickEvents()
+        initDrawEvents()
+
+        latLonPopUp.addTo(map)
+        latLonDivElement = document.getElementsByClassName("mouse-position")[0]
+        map.on("mousemove", event => {
+            latLonDivElement.innerHTML = `Lat: ${event.latlng.lat.toFixed(5)}, Lon: ${event.latlng.lng.toFixed(5)}`
+        })
+
+        readGeoJsonDirectory()
+        readEsriCountryList()
+    }
+
+    const initDrawEvents = function () {
+        map.on("draw:created", function (event) {
+            LAYER_DRAW.addLayer(event.layer)
+            updateJsonDisplay()
+        })
+        map.on("draw:edited", function (event) {
+            updateJsonDisplay()
+        })
+        map.on("draw:deleted", function (event) {
+            updateJsonDisplay()
+        })
+    }
+    const initClickEvents = function () {
+        SELECT_MYGEOJSON.addEventListener("change", () => {
+            addGeoJSON(`${URL_STATICGJ}${SELECT_MYGEOJSON.value}`, SELECT_MYGEOJSON.options[SELECT_MYGEOJSON.selectedIndex].text)
+        })
+        BTN_GET_JSON.addEventListener("click", () => {
+            addGeoJSON(INPUT_JSON_URL.value, "Provided JSON URL")
+        })
+        BTN_GET_WMS.addEventListener("click", () => {
+            addWMS(INPUT_WMS_URL.value, INPUT_WMS_LAYER.value)
+        })
+        BTN_EDIT_JSON.addEventListener("click", () => {
+            addInputJson(JSON.parse(INPUT_EDIT_JSON.value))
+        })
+        BTN_SAVE_JSON.addEventListener("click", () => {
+            let link = document.createElement('a')
+            link.setAttribute('href', encodeURI(`data:text/csvcharset=utf-8,${INPUT_EDIT_JSON.value}`))
+            link.setAttribute('target', '_blank')
+            link.setAttribute('download', 'drawn_geojson.json')
+            document.body.appendChild(link)
+            link.click()
+            link.remove()
+        })
+        BTN_GET_LEGEND.addEventListener("click", () => {
+            addLegend()
+        })
+        INPUT_WMS_OPAC.addEventListener("change", () => {
+            if (LAYER_WMS === null) return
+            LAYER_WMS.setOpacity(INPUT_WMS_OPAC.value)
+        })
+        BTN_SHOW_ESRI_COUNTRY.addEventListener("click", () => {
+            esriCountryService()
+        })
+        BTN_FIND_LOCATION.addEventListener("click", () => {
+            findLocation()
+        })
+    }
+    const findLocation = function () {
+        if (LAYER_FIND_MARKER !== null) {
+            layerControl.removeLayer(LAYER_FIND_MARKER)
+            map.removeLayer(LAYER_FIND_MARKER)
         }
-    };
+        LAYER_FIND_MARKER = L.marker([INPUT_FIND_LATITUDE.value, INPUT_FIND_LONGITUDE.value]).addTo(map)
+        LAYER_FIND_MARKER.bindPopup(`I am at Lat: ${INPUT_FIND_LATITUDE.value} and Lon: ${INPUT_FIND_LONGITUDE.value}`)
+        layerControl.addOverlay(LAYER_FIND_MARKER, "Found Location")
+        map.flyTo([INPUT_FIND_LATITUDE.value, INPUT_FIND_LONGITUDE.value], 5)
+    }
 
     const readGeoJsonDirectory = function () {
-        fetch(URL_GEOJSONDIRECTORY)
+        fetch(URL_MYGEOJSONS)
             .then(response => {
                 return response.json()
             })
             .then(directory => {
                 for (let entry in directory) {
-                    DIV_SElECTGJ.innerHTML += `<option value="${directory[entry]}">${entry}</option>`
+                    SELECT_MYGEOJSON.innerHTML += `<option value="${directory[entry]}">${entry}</option>`
                 }
             })
     }
+    const readEsriCountryList = function () {
+        fetch(URL_ESRI_COUNTRY_LIST)
+            .then(response => {
+                return response.json()
+            })
+            .then(countryList => {
+                countryList.forEach(country => {
+                    DATALIST_ESRI_COUNTRIES.innerHTML += `<option value="${country}"/>`
+                })
+            })
+    }
+    const esriCountryService = function () {
+        if (layerEsriCountry !== null) {
+            layerControl.removeLayer(layerEsriCountry)
+            map.removeLayer(layerEsriCountry)
+        }
+        let countryName = INPUT_SEARCH_COUNTRY.value
+
+        layerEsriCountry = L.esri.featureLayer({
+            url: URL_ESRI_COUNTRY_SERVICE,
+            style: {
+                color: 'rgba(0,0,0,1)',
+                opacity: 1,
+                weight: 1,
+                fillColor: 'rgba(0,0,0,0)',
+                fillOpacity: 'rgba(0,0,0,0)'
+            },
+            outSR: 4326,
+            where: `NAME='${countryName}'`,
+        })
+        layerControl.addOverlay(layerEsriCountry, `ESRI Living Atlas: ${countryName}`)
+        layerEsriCountry.addTo(map)
+        layerEsriCountry.query().where(`NAME='${countryName}'`).bounds((error, latLngBounds, response) => {
+            map.flyToBounds(latLngBounds)
+        })
+    }
     const removeGeoJSON = function () {
-        layerControl.removeLayer(layerGeoJSON);
-        map.removeLayer(layerGeoJSON);
+        layerControl.removeLayer(LAYER_GEOJSON)
+        map.removeLayer(LAYER_GEOJSON)
     }
 
     const addGeoJSON = function (url, title) {
@@ -128,25 +222,25 @@ const MapApp = (function () {
                 return response.json()
             })
             .then(gjson => {
-                removeGeoJSON();
-                layerGeoJSON = L.geoJSON(gjson).addTo(map);
-                layerControl.addOverlay(layerGeoJSON, title)
+                removeGeoJSON()
+                LAYER_GEOJSON = L.geoJSON(gjson).addTo(map)
+                layerControl.addOverlay(LAYER_GEOJSON, title)
             })
             .catch(error => {
-                console.log(error);
+                console.log(error)
                 alert("unable to add geojson to map")
             })
-    };
+    }
 
     const removeWMS = function () {
-        if (layerWMS !== null) {
-            layerControl.removeLayer(layerWMS);
-            map.removeLayer(layerWMS);
+        if (LAYER_WMS !== null) {
+            layerControl.removeLayer(LAYER_WMS)
+            map.removeLayer(LAYER_WMS)
         }
     }
 
     const addWMS = function (url, layer, title) {
-        removeWMS();
+        removeWMS()
         const wmsOptions = {
             version: '1.3.0',
             layers: layer,
@@ -162,21 +256,23 @@ const MapApp = (function () {
         if (INPUT_WMS_COLOR.value !== "") {
             wmsOptions["styles"] = INPUT_WMS_COLOR.value
         }
-        layerWMS = L.tileLayer.wms(url, wmsOptions).addTo(map);
-        layerControl.addOverlay(layerWMS, title)
-    };
+        LAYER_WMS = L.tileLayer.wms(url, wmsOptions).addTo(map)
+        layerControl.addOverlay(LAYER_WMS, (title ? title : layer))
+    }
 
     const addLegend = function () {
-        legend.addTo(map);
+        legend.addTo(map)
     }
 
     const updateJsonDisplay = function () {
-        INPUT_EDITJSON.value = JSON.stringify(layerDraw.toGeoJSON(), null, 2)
-    };
+        INPUT_EDIT_JSON.value = JSON.stringify(LAYER_DRAW.toGeoJSON(), null, 2)
+    }
+
     const addInputJson = function (json) {
-        layerDraw.clearLayers();
-        layerDraw.addLayer(L.geoJSON(json));
-    };
+        LAYER_DRAW.clearLayers()
+        LAYER_DRAW.addLayer(L.geoJSON(json))
+    }
+
     const autofillWmsInputs = function (config) {
         if (config === "gfs") {
             INPUT_WMS_URL.value = AUTOFILL_GFS.url
@@ -191,8 +287,8 @@ const MapApp = (function () {
 
     return {
         init,
-        autofillWmsInputs
-    };
+        autofillWmsInputs,
+    }
 
-}());
+}())
 MapApp.init()
