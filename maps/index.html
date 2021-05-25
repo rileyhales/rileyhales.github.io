@@ -23,13 +23,16 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
         integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
         crossorigin=""/>
+  <link rel="stylesheet" href="https://cdn.rawgit.com/socib/Leaflet.TimeDimension/master/dist/leaflet.timedimension.control.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.css"/>
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
           integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
           crossorigin=""></script>
   <script src="https://unpkg.com/esri-leaflet@2.5.0/dist/esri-leaflet.js"
           integrity="sha512-ucw7Grpc+iEQZa711gcjgMBnmd9qju1CICsRaryvX7HJklK0pGl/prxKvtHwpgm5ZHdvAil7YPxI1oWPOWK3UQ=="
           crossorigin=""></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.css"/>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/iso8601-js-period@0.2.1/iso8601.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/leaflet-timedimension@1.1.0/dist/leaflet.timedimension.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.js"></script>
   <script>
     function displayTab(showtab, activatebtn) {
@@ -82,7 +85,7 @@
     <div class="tab-content">
 
       <div class="tab-pane fade show active" id="tab-ctrls" role="tabpanel">
-        <div class="input-group">
+        <div class="input-group">`
           <div class="input-group-prepend">
             <span class="input-group-text">Find Location</span>
           </div>
@@ -140,6 +143,7 @@
         </div>
 
         <button id="btn-get-wms" class="btn btn-success btn-submit w-100">Add WMS Layer</button>
+        <button id="btn-get-wms-time" class="btn btn-success btn-submit w-100">Add WMS Layer w/ Time Dimension</button>
         <button id="btn-get-legend" class="btn btn-success btn-submit w-100">Add Legend (THREDDS)</button>
 
         <hr>

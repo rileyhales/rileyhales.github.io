@@ -20,7 +20,35 @@ const MapApp = (function () {
     const URL_STATICGJ = "/static/geojson/"
     const URL_MYGEOJSONS = `${URL_STATICGJ}directory.json`
     const URL_ESRI_COUNTRY_LIST = `${URL_STATICGJ}esri-countries-service.json`
-    // WMS Shortcuts
+    // Config JSONS
+    const TIME_LAYER_CONFIGS = {
+        name: 'time',
+        requestTimefromCapabilities: true,
+        updateTimeDimension: true,
+        updateTimeDimensionMode: 'replace',
+        cache: 20,
+    }
+    const MAP_INIT_CONFIGS = {
+        zoom: 4,
+        minZoom: 2,
+        zoomSnap: .5,
+        boxZoom: true,
+        maxBounds: L.latLngBounds(L.latLng(-100.0, -270.0), L.latLng(100.0, 270.0)),
+        center: [0, 0],
+        timeDimension: true,
+        timeDimensionControl: true,
+        timeDimensionControlOptions: {
+            position: "bottomleft",
+            autoPlay: true,
+            loopButton: true,
+            backwardButton: true,
+            forwardButton: true,
+            timeSliderDragUpdate: true,
+            minSpeed: 2,
+            maxSpeed: 6,
+            speedStep: 1,
+        },
+    }
     const URL_UCAR_GFS = "https://thredds.ucar.edu/thredds/wms/grib/NCEP/GFS/Global_0p25deg/Best"
     const AUTOFILL_GFS = {
         url: URL_UCAR_GFS,
@@ -45,6 +73,7 @@ const MapApp = (function () {
     let LAYER_FIND_MARKER = null;
     // WMS Buttons and Inputs
     const BTN_GET_WMS = document.getElementById("btn-get-wms")
+    const BTN_GET_WMS_TIME = document.getElementById("btn-get-wms-time")
     const BTN_GET_LEGEND = document.getElementById("btn-get-legend")
     const INPUT_WMS_URL = document.getElementById("input-wms-url")
     const INPUT_WMS_LAYER = document.getElementById("input-wms-layer")
@@ -82,7 +111,7 @@ const MapApp = (function () {
     }
 
     const init = function () {
-        map = L.map(DIV_MAP).setView([0, 0], 2)
+        map = L.map(DIV_MAP, MAP_INIT_CONFIGS)
         basemaps[Object.keys(basemaps)[0]].addTo(map)
 
         layerControl = L.control.layers(basemaps, {"Drawn Items": LAYER_DRAW.addTo(map)}, {collapsed: false})
@@ -122,7 +151,10 @@ const MapApp = (function () {
             addGeoJSON(INPUT_JSON_URL.value, "Provided JSON URL")
         })
         BTN_GET_WMS.addEventListener("click", () => {
-            addWMS(INPUT_WMS_URL.value, INPUT_WMS_LAYER.value)
+            addWMS(INPUT_WMS_URL.value, INPUT_WMS_LAYER.value, null, false)
+        })
+        BTN_GET_WMS_TIME.addEventListener("click", () => {
+            addWMS(INPUT_WMS_URL.value, INPUT_WMS_LAYER.value, null, true)
         })
         BTN_EDIT_JSON.addEventListener("click", () => {
             addInputJson(JSON.parse(INPUT_EDIT_JSON.value))
@@ -239,10 +271,10 @@ const MapApp = (function () {
         }
     }
 
-    const addWMS = function (url, layer, title) {
+    const addWMS = function (url, layer, title, time) {
         removeWMS()
         const wmsOptions = {
-            version: '1.3.0',
+            version: "1.3.0",
             layers: layer,
             format: "image/png",
             transparent: true,
@@ -256,7 +288,8 @@ const MapApp = (function () {
         if (INPUT_WMS_COLOR.value !== "") {
             wmsOptions["styles"] = INPUT_WMS_COLOR.value
         }
-        LAYER_WMS = L.tileLayer.wms(url, wmsOptions).addTo(map)
+        if (time) LAYER_WMS = L.timeDimension.layer.wms(L.tileLayer.wms(url, wmsOptions), TIME_LAYER_CONFIGS).addTo(map)
+        else LAYER_WMS = L.tileLayer.wms(url, wmsOptions).addTo(map)
         layerControl.addOverlay(LAYER_WMS, (title ? title : layer))
     }
 
@@ -288,6 +321,7 @@ const MapApp = (function () {
     return {
         init,
         autofillWmsInputs,
+        "map": map
     }
 
 }())
