@@ -321,7 +321,6 @@ const MapApp = (function () {
     return {
         init,
         autofillWmsInputs,
-        "map": map
     }
 
 }())
