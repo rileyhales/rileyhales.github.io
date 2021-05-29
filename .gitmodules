@@ -1,0 +1,4 @@
+[submodule "quixx"]
+	path = quixx
+	url = https://github.com/rileyhales/quixx
+	branch = gh-pages
