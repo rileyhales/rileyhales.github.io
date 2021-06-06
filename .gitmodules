@@ -2,3 +2,7 @@
 	path = quixx
 	url = https://github.com/rileyhales/quixx
 	branch = gh-pages
+[submodule "movies"]
+	path = movies
+	url = https://github.com/rileyhales/movies
+	branch = gh-pages

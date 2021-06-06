@@ -135,6 +135,6 @@ const MovieGallery = (function () {
 
 })();
 
-MovieGallery.init("/movies/mvdb.json")
+MovieGallery.init("/movies-oldversion/mvdb.json")
 document.getElementById("search-button").onclick = function () {MovieGallery.search(document.getElementById("search-box").value)};
 document.getElementById("random-button").onclick = function () {MovieGallery.random()};
