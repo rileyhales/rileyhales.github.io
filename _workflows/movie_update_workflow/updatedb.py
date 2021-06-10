@@ -56,15 +56,16 @@ def get_new_movie_from_tmdb(df, tmdb_api_key):
     return df
 
 
-def update_movie_poster_path(movie_df, tmdb_api_key):
+def update_movie_information(movie_df, tmdb_api_key):
     for movie in movie_df['Movie']:
         url = f"https://api.themoviedb.org/3/movie/{movie_df.loc[movie_df['Movie'] == movie, 'idTMDB'].values[0]}?"
         params = {'language': 'en-US', 'api_key': tmdb_api_key, }
         try:
             data = requests.get(url, params).json()
             movie_df.loc[movie_df['Movie'] == movie, 'Poster'] = data['poster_path']
+            movie_df.loc[movie_df['Movie'] == movie, 'time'] = data['runtime']
         except Exception:
-            print('Poster not found:   {0}'.format(movie))
+            print('Movie information not found:   {0}'.format(movie))
 
     return movie_df
 
@@ -139,28 +140,34 @@ if __name__ == '__main__':
 
     # read the master sheet
     sheet_id = '1STMqN8zF0rUsskwK5FCGFrmLRy_rdLd900_blI-T49s'
-    sheet_range = 'Sheet1!A:J'
+    sheet_range = 'Sheet1!A:K'
     df_m = rch.web.read_google_sheet(google_api_service, sheet_id, sheet_range)
+    print(df_m)
+    print(df_m.columns)
 
     # merge the new data with the master google sheet
     df_m = df_m.merge(df_r, how='outer')
+    print(df_m.columns)
     # combine duplicate row entries
     df_m = df_m.groupby('Movie', as_index=False).aggregate('first')
     df_m.sort_values('Movie', inplace=True)
-    df_m = df_m.reindex(columns=df_r.columns)
+    # df_m = df_m.reindex(columns=df_r.columns)
 
     # fill in missing information about the movies from the tmdb api
     df_m = get_new_movie_from_tmdb(df_m, tmdb_api_key)
+    # df_m = update_movie_information(df_m, tmdb_api_key)
     df_m['idTMDB'] = df_m['idTMDB'].astype(int, errors='ignore')
+    df_m['time'] = df_m['time'].astype(int, errors='ignore')
 
     # get a preview
     print(df_m)
+    print(df_m.columns)
 
     # export the new master sheet to google sheets
-    rch.web.write_google_sheet(df_m, google_api_service, sheet_id, sheet_range)
+    # rch.web.write_google_sheet(df_m, google_api_service, sheet_id, sheet_range)
 
     # create a js file which the website will use
     df_m.index = df_m['Movie']
     del df_m['Movie']
-    with open(os.path.join(os.path.dirname(os.path.dirname(base_path)), 'movies', 'mvdb.json'), 'w') as f:
+    with open('mvdb.json', 'w') as f:
         f.write(df_m.to_json(orient='index'))

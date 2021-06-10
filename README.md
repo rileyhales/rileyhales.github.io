@@ -9,5 +9,5 @@ To download copies of the submodules run:
 `git submodule update --init --recursive --force`
 
 To add new submodules run:  
-`git submodule add -b <branch name> <github repo url>`
+`git submodule add -b <branch name> <github repo url>`  
 `git submodule add -b gh-pages https://github.com/rileyhales/reactapprepo`
