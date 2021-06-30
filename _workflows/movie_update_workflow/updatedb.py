@@ -115,28 +115,27 @@ if __name__ == '__main__':
     # read my spreadsheet
     sheet_id = '1IwN6augG0fm6NG8-ddhMmBrinTOpgyCnNvLKCFJA4bI'
     df_r = rch.web.read_google_sheet(google_api_service, sheet_id, 'MovieList!A:L', skip_cols=1)
-    df_r.rename(columns={'MA': 'onGoogle', 'UV': 'onFandango', 'UHD': 'isUHD', 'File': 'onFile'}, inplace=True)
-    del df_r['Only On']
+    df_r.rename(columns={'MA': 'onGoogle', 'UV': 'onFandango', 'uhd': 'uhd', 'file': 'file'}, inplace=True)
+    del df_r['onlyon']
 
     # zach's google sheet
     sheet_id = '1iYR2OP20d9RUlmEPsCdN3ksHRWJTfNh59Bph3Lv_GVw'
     df_z = rch.web.read_google_sheet(google_api_service, sheet_id, 'Movies!A:H', skip_rows=(1, 2))
     df_z.rename(columns={'Title': 'Movie', '3D Blu-ray': 'is3D', 'Google Play': 'onGoogle',
-                         'Vudu': 'onFandango', '4K UHD': 'isUHD'},
-                inplace=True)
+                         'Vudu': 'onFandango', '4K UHD': 'uhd'}, inplace=True)
     del df_z['Movies Anywhere']
     df_z.drop(index=max(df_z.index), inplace=True)
 
-    # merge the two sheets together
-    df_r = df_r.merge(df_z, how='outer', on=['Movie', 'onGoogle', 'Blu-ray', 'DVD', 'onFandango', 'isUHD'])
-    # combine duplicate row entries
-    df_r = df_r.groupby('Movie', as_index=False).aggregate('first')
-    df_r.sort_values('Movie', inplace=True)
-    df_r = df_r.reindex(columns=df_r.columns)
-    # merge bluray and dvd columns into the disc column
-    df_r['onDisc'] = df_r['Blu-ray'].combine_first(df_r['DVD'])
-    del df_r['Blu-ray'], df_r['DVD']
-    df_r.replace(np.nan, '', inplace=True)
+    # # merge the two sheets together
+    # df_r = df_r.merge(df_z, how='outer', on=['Movie', 'onGoogle', 'Blu-ray', 'DVD', 'onFandango', 'isUHD'])
+    # # combine duplicate row entries
+    # df_r = df_r.groupby('Movie', as_index=False).aggregate('first')
+    # df_r.sort_values('Movie', inplace=True)
+    # df_r = df_r.reindex(columns=df_r.columns)
+    # # merge bluray and dvd columns into the disc column
+    # df_r['onDisc'] = df_r['Blu-ray'].combine_first(df_r['DVD'])
+    # del df_r['Blu-ray'], df_r['DVD']
+    # df_r.replace(np.nan, '', inplace=True)
 
     # read the master sheet
     sheet_id = '1STMqN8zF0rUsskwK5FCGFrmLRy_rdLd900_blI-T49s'
